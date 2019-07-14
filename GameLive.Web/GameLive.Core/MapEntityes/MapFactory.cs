@@ -21,6 +21,7 @@ namespace GameLive.Core.MapEntityes
                 for (int y = 0; y < height; y++)
                 {
                     var rndStatus = _rnd.Next(2);
+                    //var rndAge = _rnd.Next(3);
 
                     var mapCell = new MapCell()
                     {

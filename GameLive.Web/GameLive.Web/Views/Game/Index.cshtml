@@ -4,8 +4,8 @@
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <link href="~/Content/MapStyles.css" rel="stylesheet" />
 <div>
-    <input id="xSize" type="number" value="100">
-    <input id="ySize" type="number" value="100">
+    <input id="xSize" type="number" value="50">
+    <input id="ySize" type="number" value="50">
     <div id="mainButton">start</div>
 </div>
 
@@ -49,6 +49,12 @@
                 var cell = row[y];
 
                 var statusClass = cell.Status === 1 ? "cell-alive" : "cell-dead";
+
+                if (cell.Age === 1) {
+                    statusClass += " old";
+                } else if (cell.Age > 1) {
+                    statusClass += " so-old";
+                }
 
                 mapHtml += "<td class='map-cell " + statusClass + "'></td>";
             }

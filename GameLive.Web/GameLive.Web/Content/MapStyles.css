@@ -1,15 +1,20 @@
 ﻿.map-cell {
     width: 10px;
     height: 10px;
-    /*display: block;
-    float: left;
-    margin: 1px;*/
 }
 
 .cell-dead {
-    background-color: gray
+    background-color: ghostwhite
 }
 
 .cell-alive {
-    background-color: green
+    background-color: chartreuse
 }
+
+    .cell-alive.old {
+        background-color: #19da19
+    }
+
+    .cell-alive.so-old {
+        background-color: #078407
+    }
