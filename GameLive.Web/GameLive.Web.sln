@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLive.Web", "GameLive.Web\GameLive.Web.csproj", "{24EE4A8E-7264-423D-8C3E-6884F1B56210}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLive.Core", "GameLive.Core\GameLive.Core.csproj", "{900D5B0B-019C-4673-8D57-6B2EF9E8FA93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24EE4A8E-7264-423D-8C3E-6884F1B56210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24EE4A8E-7264-423D-8C3E-6884F1B56210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24EE4A8E-7264-423D-8C3E-6884F1B56210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24EE4A8E-7264-423D-8C3E-6884F1B56210}.Release|Any CPU.Build.0 = Release|Any CPU
+		{900D5B0B-019C-4673-8D57-6B2EF9E8FA93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{900D5B0B-019C-4673-8D57-6B2EF9E8FA93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{900D5B0B-019C-4673-8D57-6B2EF9E8FA93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{900D5B0B-019C-4673-8D57-6B2EF9E8FA93}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {854E07CE-3D5A-475C-8930-1AA45EFDE7BD}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,66 @@
+﻿
+<h2>Live:</h2>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/Content/MapStyles.css" rel="stylesheet" />
+<div>
+    <input id="xSize" type="number" value="100">
+    <input id="ySize" type="number" value="100">
+    <div id="mainButton">start</div>
+</div>
+
+<div id="mapDiv"></div>
+<div id="error"></div>
+
+<script>
+    var serviceURL = '/Game/GetCurrentMapState';
+
+    $("#mainButton").click(function () {
+        UpdateMap();
+    });
+
+    var d = "@Url.Action("GetCurrentMapState", "Game")";
+
+    function UpdateMap() {
+        var x = $("#xSize")[0].value;
+        var y = $("#ySize")[0].value;
+
+        $.ajax({
+            type: "POST",
+            url: serviceURL,
+            data: "{'x':'" + x + "','y':'" + y + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status) {
+                DrawMap(data);
+            },
+            error: function (e) { }
+        });
+    }
+
+    function DrawMap(data) {
+        var mapHtml = "<table>";
+
+        for (var x = 0; x < data.Cells.length; x++) {
+            mapHtml += "<tr>";
+            var row = data.Cells[x];
+
+            for (var y = 0; y < row.length; y++) {
+                var cell = row[y];
+
+                var statusClass = cell.Status === 1 ? "cell-alive" : "cell-dead";
+
+                mapHtml += "<td class='map-cell " + statusClass + "'></td>";
+            }
+
+            mapHtml += "</tr>";
+        }
+
+        mapHtml += "</table>";
+
+        $("#mapDiv").empty();
+        $("#mapDiv").append(mapHtml);
+    }
+
+</script>
+
