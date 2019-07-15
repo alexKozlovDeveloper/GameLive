@@ -70,5 +70,11 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameLive.Core\GameLive.Core.csproj">
+      <Project>{900d5b0b-019c-4673-8d57-6b2ef9e8fa93}</Project>
+      <Name>GameLive.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

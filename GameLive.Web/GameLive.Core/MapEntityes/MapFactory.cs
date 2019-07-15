@@ -25,6 +25,8 @@ namespace GameLive.Core.MapEntityes
 
                     var mapCell = new MapCell()
                     {
+                        X = x,
+                        Y = y,
                         Age = 0,
                         Status = (CellStatus)rndStatus
                     };

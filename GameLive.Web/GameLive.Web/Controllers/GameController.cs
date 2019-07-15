@@ -32,6 +32,12 @@ namespace GameLive.Web.Controllers
 
             var mapFactory = new MapFactory();
             var map = mapFactory.GetRandomMap(xSize, ySize);
+
+            MapSaver.Save(map, @"C:\Schneider Electric\GameLive\Service\map1.txt");
+            var mapController = new MapController(map);
+            mapController.NextTic();
+            MapSaver.Save(mapController.Map, @"C:\Schneider Electric\GameLive\Service\map2.txt");
+
             return JsonConvert.SerializeObject(map);
         }
     }

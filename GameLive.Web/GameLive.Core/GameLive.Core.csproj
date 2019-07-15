@@ -44,7 +44,9 @@
     <Compile Include="MapEntityes\CellStatus.cs" />
     <Compile Include="MapEntityes\Map.cs" />
     <Compile Include="MapEntityes\MapCell.cs" />
+    <Compile Include="MapEntityes\MapController.cs" />
     <Compile Include="MapEntityes\MapFactory.cs" />
+    <Compile Include="MapEntityes\MapSaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
