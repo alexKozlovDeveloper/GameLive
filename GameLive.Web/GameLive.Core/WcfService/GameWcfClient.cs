@@ -19,6 +19,9 @@ namespace GameLive.Core.WcfService
         public string GetCurrentMap()
         {
             BasicHttpBinding binding = new BasicHttpBinding(); // Привязка
+            binding.MaxBufferSize = 20_000_000;
+            binding.MaxBufferPoolSize = 20_000_000;
+            binding.MaxReceivedMessageSize = 20_000_000;
             // Создаём конечную точку.
             EndpointAddress endpoint = new EndpointAddress(_address);
             // Создаём фабрику каналов.

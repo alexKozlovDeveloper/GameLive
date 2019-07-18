@@ -34,7 +34,7 @@ namespace SecondWindowsService
             _thread = new Thread(Func);
             
             var mapFactory = new MapFactory();
-            var map = mapFactory.GetRandomMap(5, 5);
+            var map = mapFactory.GetRandomMap(70, 70);
             _mapController = new MapController(map);
 
             _server = new GameWcfServer("http://localhost:8080/IChatService4", _log, _mapController);
@@ -90,7 +90,7 @@ namespace SecondWindowsService
                 _server.Stop();
                 _log.Info("End.");
                 _isWork = false;
-                Thread.Sleep(500);
+                Thread.Sleep(5000);
             }
             catch (Exception e)
             {
@@ -106,7 +106,7 @@ namespace SecondWindowsService
                 {
                     _log.Info("Working...");
                     _mapController.NextTic();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(50);
                 }
             }
             catch (Exception e)

@@ -61,14 +61,14 @@ namespace GameLive.Core.MapEntityes
                             newCell.Status = CellStatus.Dead;
                         }
 
-                        //newRow.Add(newCell);
-                        newRow.Add(new MapCell()
-                        {
-                            X = mapCell.X,
-                            Y = mapCell.Y,
-                            Age = rnd.Next(4),
-                            Status = (CellStatus)rnd.Next(2)
-                        });
+                        newRow.Add(newCell);
+                        //newRow.Add(new MapCell()
+                        //{
+                        //    X = mapCell.X,
+                        //    Y = mapCell.Y,
+                        //    Age = rnd.Next(4),
+                        //    Status = (CellStatus)rnd.Next(2)
+                        //});
                     }
 
                     newCells.Add(newRow);
