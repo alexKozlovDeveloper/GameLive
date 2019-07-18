@@ -10,7 +10,7 @@ namespace GameLive.Core.WcfService
     {
         public string GetCurrentMap(string message)
         {
-            Console.WriteLine($"Сервер получил сообщение:  {message}");
+            //Console.WriteLine($"Сервер получил сообщение:  {message}");
             return "lol kek";
         }
     }

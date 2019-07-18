@@ -5,6 +5,7 @@ using System.ServiceProcess;
 using System.Web;
 using System.Web.Mvc;
 using GameLive.Core.MapEntityes;
+using GameLive.Core.WcfService;
 using Newtonsoft.Json;
 
 namespace GameLive.Web.Controllers
@@ -37,9 +38,17 @@ namespace GameLive.Web.Controllers
             //TestFuncDepracate();
 
             //MapSaver.Save(map, @"C:\Schneider Electric\GameLive\Service\ActualMap.txt");
-            var map = MapSaver.Load(@"C:\Schneider Electric\GameLive\Service\ActualMap.txt");
 
-            return JsonConvert.SerializeObject(map);
+
+
+            //var map = MapSaver.Load(@"C:\Schneider Electric\GameLive\Service\ActualMap.txt");
+
+            //return JsonConvert.SerializeObject(map);
+
+
+            var client = new GameWcfClient("http://localhost:8080/IChatService4");
+
+            return client.GetCurrentMap();
         }
 
         private void TestFuncDepracate()

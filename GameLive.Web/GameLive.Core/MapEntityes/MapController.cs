@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace GameLive.Core.MapEntityes
 {
     public class MapController
     {
+        private readonly Object _lock = new object();
+
         public Map Map { get; }
 
         public MapController(Map map)
@@ -17,50 +20,74 @@ namespace GameLive.Core.MapEntityes
 
         public void NextTic()
         {
-            var newCells = new List<List<MapCell>>();
+            var rnd = new Random();
 
-            foreach (var row in Map.Cells)
+            lock (_lock)
             {
-                var newRow = new List<MapCell>();
+                var newCells = new List<List<MapCell>>();
 
-                foreach (var mapCell in row)
+                foreach (var row in Map.Cells)
                 {
-                    var neighboringCell = Map.GetNeighboringCells(mapCell);
+                    var newRow = new List<MapCell>();
 
-                    var aliveCount = GetAliveCount(neighboringCell);
-
-                    var newCell = new MapCell()
+                    foreach (var mapCell in row)
                     {
-                        X = mapCell.X,
-                        Y = mapCell.Y
-                    };
+                        var neighboringCell = Map.GetNeighboringCells(mapCell);
 
-                    //newCell.Age = mapCell.Age + 1;
-                    //newCell.Status = mapCell.Status;
+                        var aliveCount = GetAliveCount(neighboringCell);
 
-                    if (mapCell.Status == CellStatus.Dead && aliveCount == 3)
-                    {
-                        newCell.Age = 0;
-                        newCell.Status = CellStatus.Alive;
+                        var newCell = new MapCell()
+                        {
+                            X = mapCell.X,
+                            Y = mapCell.Y
+                        };
+
+                        //newCell.Age = mapCell.Age + 1;
+                        //newCell.Status = mapCell.Status;
+
+                        if (mapCell.Status == CellStatus.Dead && aliveCount == 3)
+                        {
+                            newCell.Age = 0;
+                            newCell.Status = CellStatus.Alive;
+                        }
+                        else if (mapCell.Status == CellStatus.Alive && (aliveCount == 2 || aliveCount == 3))
+                        {
+                            newCell.Age = mapCell.Age + 1;
+                            newCell.Status = CellStatus.Alive;
+                        }
+                        else
+                        {
+                            newCell.Age = 0;
+                            newCell.Status = CellStatus.Dead;
+                        }
+
+                        //newRow.Add(newCell);
+                        newRow.Add(new MapCell()
+                        {
+                            X = mapCell.X,
+                            Y = mapCell.Y,
+                            Age = rnd.Next(4),
+                            Status = (CellStatus)rnd.Next(2)
+                        });
                     }
-                    else if (mapCell.Status == CellStatus.Alive && (aliveCount == 2 || aliveCount == 3))
-                    {
-                        newCell.Age = mapCell.Age + 1;
-                        newCell.Status = CellStatus.Alive;
-                    }
-                    else
-                    {
-                        newCell.Age = 0;
-                        newCell.Status = CellStatus.Dead;
-                    }
 
-                    newRow.Add(newCell);
+                    newCells.Add(newRow);
                 }
 
-                newCells.Add(newRow);
+                Map.Cells = newCells;
+            }
+        }
+
+        public string GetMapAsJson()
+        {
+            var result = string.Empty;
+
+            lock (_lock)
+            {
+                result = JsonConvert.SerializeObject(Map);
             }
 
-            Map.Cells = newCells;
+            return result;
         }
 
         private int GetAliveCount(IEnumerable<MapCell> cells)

@@ -13,14 +13,9 @@ namespace GameLive.TestClientConsole
         static void Main(string[] args)
         {
             var logger = new Logger("log");
+            var client = new GameWcfClient("http://localhost:8080/IChatService4");
 
-            logger.Info("abc");
-            logger.Warn("abc");
-            logger.Info("abc");
-
-            var client = new GameWcfClient("http://localhost:8000/IChatService");
-
-            client.Connect();
+            client.GetCurrentMap();
 
 
         }

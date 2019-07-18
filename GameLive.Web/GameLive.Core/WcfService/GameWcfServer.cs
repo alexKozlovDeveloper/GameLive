@@ -6,10 +6,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GameLive.Core.Interfaces;
+using GameLive.Core.MapEntityes;
 
 namespace GameLive.Core.WcfService
 {
-    public class GameWcfServer
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    public class GameWcfServer : IGameWcfService
     {
         private ILogger _log;
 
@@ -19,10 +21,18 @@ namespace GameLive.Core.WcfService
 
         private readonly Uri _address;
 
-        public GameWcfServer(string addressUri, ILogger logger)
+        private MapController _mapcontroller;
+
+        public GameWcfServer()
+        {
+            
+        }
+
+        public GameWcfServer(string addressUri, ILogger logger, MapController mapcontroller)
         {
             _address = new Uri(addressUri);
             _log = logger;
+            _mapcontroller = mapcontroller;
         }
 
         public void Start()
@@ -40,30 +50,44 @@ namespace GameLive.Core.WcfService
             _isServerWork = false;
         }
 
+        public string GetCurrentMap(string message)
+        {
+            //Console.WriteLine($"Сервер получил сообщение:  {message}");
+            return _mapcontroller.GetMapAsJson();
+        }
+
         private void ListeningFunction()
         {
-            // Адрес, на котором будет работать служба.
-            //Uri address = new Uri("http://localhost:8000/IChatService");
-            // Привязка, т.е. транспорт, по которому будет происходить обмен сообщениями
-            BasicHttpBinding binding = new BasicHttpBinding();
-            // Контракт
-            Type contract = typeof(IGameWcfService);
-
-            // Создаём хост с указанием сервиса
-            ServiceHost serviceHost = new ServiceHost(typeof(GameWcfService));
-            // Добавляем конечную точку
-            serviceHost.AddServiceEndpoint(contract, binding, _address);
-            // Запускаем наш хост
-            serviceHost.Open();
-            _log.Info("Сервер запущен.");
-
-            while (_isServerWork)
+            try
             {
-                _log.Info("ListeningFunction working...");
-                Thread.Sleep(100);
-            }
+                // Адрес, на котором будет работать служба.
+                //Uri address = new Uri("http://localhost:8000/IChatService");
+                // Привязка, т.е. транспорт, по которому будет происходить обмен сообщениями
+                BasicHttpBinding binding = new BasicHttpBinding();
+                // Контракт
+                Type contract = typeof(IGameWcfService);
 
-            serviceHost.Close();
+                // Создаём хост с указанием сервиса
+                ServiceHost serviceHost = new ServiceHost(this);
+                // Добавляем конечную точку
+                serviceHost.AddServiceEndpoint(contract, binding, _address);
+                // Запускаем наш хост
+                serviceHost.Open();
+                _log.Info("Сервер запущен.");
+
+                while (_isServerWork)
+                {
+                    _log.Info("ListeningFunction working...");
+                    Thread.Sleep(100);
+                }
+
+                serviceHost.Close();
+
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message);
+            }
         }
 
     }

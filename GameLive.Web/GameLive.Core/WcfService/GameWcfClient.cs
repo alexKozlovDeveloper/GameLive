@@ -16,7 +16,7 @@ namespace GameLive.Core.WcfService
             _address = new Uri(addressUri);
         }
 
-        public void Connect()
+        public string GetCurrentMap()
         {
             BasicHttpBinding binding = new BasicHttpBinding(); // Привязка
             // Создаём конечную точку.
@@ -26,11 +26,12 @@ namespace GameLive.Core.WcfService
             // Создаём канал
             IGameWcfService channel = channelFactory.CreateChannel();
             // Отправляем сообщение
-           var res = channel.GetCurrentMap("Send message using WCF!!!");
+            var res = channel.GetCurrentMap("From client");
 
-            Console.WriteLine($"from server '{res}'");
+            //Console.WriteLine($"from server '{res}'");
             // После нажатия клавиши клиент завершит свою работу
-            Console.ReadKey();
+            //Console.ReadKey();
+            return res;
         }
     }
 }

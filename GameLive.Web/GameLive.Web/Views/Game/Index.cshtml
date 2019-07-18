@@ -19,6 +19,10 @@
         UpdateMap();
     });
 
+    window.setInterval(function() {
+        UpdateMap();
+    }, 200);
+
     var d = "@Url.Action("GetCurrentMapState", "Game")";
 
     function UpdateMap() {
