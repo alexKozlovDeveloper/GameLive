@@ -9,66 +9,111 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GameLive.Core.Interfaces;
+using GameLive.Core.Logging;
 using GameLive.Core.MapEntityes;
+using GameLive.Core.WcfService;
 
 namespace GameLive.Service
 {
     public partial class GameService : ServiceBase
     {
-        private readonly string _filePath;
-        private readonly string _fileName;
+        //private readonly string _filePath;
+        //private readonly string _fileName;
 
-        private string FilePath => Path.Combine(_filePath, _fileName);
+        //private string FilePath => Path.Combine(_filePath, _fileName);
 
-        private readonly Thread _gameThread;
-        private bool _isWorking;
+        //private readonly Thread _gameThread;
+        //private bool _isWorking;
 
-        private MapController _mapController;
+        //private MapController _mapController;
 
-        private readonly object _mapAccessLock = new object();
+        //private readonly object _mapAccessLock = new object();
+
+        //private ILogger _log;
+        //private GameWcfServer server;
+
+        
 
         public GameService()
         {
             InitializeComponent();
 
-            this.ServiceName = "GameService";
+            //_log = new Logger(@"C:\Schneider Electric\GameLive\GlobalLog");
+            //server = new GameWcfServer("http://localhost:8000/IChatService", _log);
 
-            _filePath = @"C:\Schneider Electric\GameLive\Service";
-            _fileName = "serviceLog.txt";
+            //this.ServiceName = "GameService";
 
-            _gameThread = new Thread(GameFunction);
+            //_filePath = @"C:\Schneider Electric\GameLive\Service";
+            //_fileName = "serviceLog.txt";
+
+            //_gameThread = new Thread(GameMainFunction);
+           // _log.Info("Init Done");
         }
 
-        private void GameFunction()
+        private void GameMainFunction()
         {
-            while (_isWorking)
-            {
-                lock (_mapAccessLock)
-                {
-                    _mapController.NextTic();
-                }
+            
 
-                File.AppendAllText(FilePath, "working2..." + Environment.NewLine);
+            //server.Start();
 
-                Thread.Sleep(1000);
-            }
+            //while (_isWorking)
+            //{
+            //    Thread.Sleep(100);
+            //}
+
+            //try
+            //{
+            //    while (_isWorking)
+            //    {
+            //        lock (_mapAccessLock)
+            //        {
+            //            _mapController.NextTic();
+            //        }
+
+            //        MapSaver.Save(_mapController.Map, @"C:\Schneider Electric\GameLive\Service\ActualMap.txt");
+
+            //        //File.AppendAllText(FilePath, "working2..." + Environment.NewLine);
+
+            //        Thread.Sleep(1000);
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    File.AppendAllText(FilePath, e.Message + Environment.NewLine);
+            //}
         }
 
         protected override void OnStart(string[] args)
         {
-            var mapFactory = new MapFactory();
-            var map = mapFactory.GetRandomMap(50, 50);
-            _mapController = new MapController(map);
+            //_log.Info("Start");
+            //server.Start();
+            
+            //_isWorking = true;
+            //_gameThread.Start();
 
-            _isWorking = true;
-            _gameThread.Start();
+            //try
+            //{
+            //    var mapFactory = new MapFactory();
+            //    var map = mapFactory.GetRandomMap(50, 50);
+            //    _mapController = new MapController(map);
+
+            //    _isWorking = true;
+            //    _gameThread.Start();
+            //}
+            //catch (Exception e)
+            //{
+            //    File.AppendAllText(FilePath,e.Message + Environment.NewLine);
+            //}
         }
 
         protected override void OnStop()
         {
-            _isWorking = false;
-            Thread.Sleep(1500);
-            _gameThread.Abort();
+            //_log.Info("Stop");
+            //_isWorking = false;
+            //server.Stop();
+           // Thread.Sleep(1500);
+            //_gameThread.Abort();
         }
     }
 }

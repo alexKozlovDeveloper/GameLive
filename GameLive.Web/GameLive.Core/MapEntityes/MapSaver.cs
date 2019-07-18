@@ -5,10 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace GameLive.Core.MapEntityes
 {
     public static class MapSaver
     {
+        //public static void Save(Map map, string filePath)
+        //{
+        //    var str = JsonConvert.SerializeObject(map);
+        //    File.WriteAllText(filePath, str);
+        //}
+
         public static void Save(Map map, string filePath)
         {
             var lines = new List<string>();
@@ -26,6 +33,17 @@ namespace GameLive.Core.MapEntityes
             }
 
             File.WriteAllLines(filePath, lines);
+        }
+
+        public static Map Load(string filePath)
+        {
+            var str = File.ReadAllText(filePath);
+            //var map = JsonConvert.DeserializeObject<Map>(str);
+
+            var mapFactory = new MapFactory();
+            var map = mapFactory.GetRandomMap(50, 50);
+
+            return map;
         }
     }
 }

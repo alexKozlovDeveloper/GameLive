@@ -10,12 +10,14 @@ namespace GameLive.Core.Logging
 {
     public class Logger : ILogger
     {
+        private readonly Guid _id = Guid.NewGuid();
+
         private readonly string _folderPath;
         private readonly bool _writeToConsole;
 
         private readonly Object _lockObject;
 
-        private string FilePath => Path.Combine(_folderPath, $"[{DateTime.Now:MM-dd-yyyy}] Log.txt");
+        private string FilePath => Path.Combine(_folderPath, $"[{DateTime.Now:MM-dd-yyyy}] ({_id}) Log.txt");
 
         public Logger(string folderPath, bool writeToConsole = false)
         {

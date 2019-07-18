@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{900D5B0B-019C-4673-8D57-6B2EF9E8FA93}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GameLive.Core</RootNamespace>
-    <AssemblyName>GameLive.Core</AssemblyName>
+    <ProjectGuid>{5723CB5A-B778-4D81-876A-E883DA19D175}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GameLive.TestClientConsole</RootNamespace>
+    <AssemblyName>GameLive.TestClientConsole</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,7 +35,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,20 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\ILogger.cs" />
-    <Compile Include="Logging\Logger.cs" />
-    <Compile Include="MapEntityes\CellStatus.cs" />
-    <Compile Include="MapEntityes\Map.cs" />
-    <Compile Include="MapEntityes\MapCell.cs" />
-    <Compile Include="MapEntityes\MapController.cs" />
-    <Compile Include="MapEntityes\MapFactory.cs" />
-    <Compile Include="MapEntityes\MapSaver.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WcfService\GameWcfClient.cs" />
-    <Compile Include="WcfService\GameWcfServer.cs" />
-    <Compile Include="WcfService\GameWcfService.cs" />
-    <Compile Include="WcfService\IGameWcfService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameLive.Core\GameLive.Core.csproj">
+      <Project>{900d5b0b-019c-4673-8d57-6b2ef9e8fa93}</Project>
+      <Name>GameLive.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
