@@ -106,7 +106,7 @@ namespace SecondWindowsService
                 {
                     _log.Info("Working...");
                     _mapController.NextTic();
-                    Thread.Sleep(50);
+                    Thread.Sleep(100);
                 }
             }
             catch (Exception e)
