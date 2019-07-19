@@ -13,5 +13,10 @@ namespace GameLive.Core.WcfService
             //Console.WriteLine($"Сервер получил сообщение:  {message}");
             return "lol kek";
         }
+
+        public void ResetMap(int width, int height)
+        {
+            
+        }
     }
 }

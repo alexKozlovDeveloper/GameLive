@@ -14,9 +14,9 @@ namespace GameLive.TestServerConsole
         {
             var logger = new Logger("log",true);
 
-            var server = new GameWcfServer("http://localhost:8002/IChatService3", logger);
+            //var server = new GameWcfServer("http://localhost:8002/IChatService3", logger);
 
-            server.Start();
+            //server.Start();
 
             Console.ReadKey();
         }

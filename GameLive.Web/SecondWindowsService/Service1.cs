@@ -67,6 +67,11 @@ namespace SecondWindowsService
             return "lol kek servise 2";
         }
 
+        public void ResetMap(int width, int height)
+        {
+            
+        }
+
         protected override void OnStart(string[] args)
         {
             try

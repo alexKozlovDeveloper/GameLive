@@ -11,7 +11,7 @@ namespace GameLive.Core.MapEntityes
     {
         private readonly Object _lock = new object();
 
-        public Map Map { get; }
+        public Map Map { get; private set; }
 
         public MapController(Map map)
         {
@@ -88,6 +88,17 @@ namespace GameLive.Core.MapEntityes
             }
 
             return result;
+        }
+
+        public void ResetMap(int width, int height)
+        {
+            var mapFactory = new MapFactory();
+            var newMap = mapFactory.GetRandomMap(width, height);
+
+            lock (_lock)
+            {
+                Map = newMap;
+            }
         }
 
         private int GetAliveCount(IEnumerable<MapCell> cells)

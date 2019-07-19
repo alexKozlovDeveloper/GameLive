@@ -51,6 +51,33 @@ namespace GameLive.Web.Controllers
             return client.GetCurrentMap();
         }
 
+        [HttpPost]
+        public string ResetMap(string x, string y)
+        {
+            var xSize = int.Parse(x);
+            var ySize = int.Parse(y);
+
+            //var mapFactory = new MapFactory();
+            //var map = mapFactory.GetRandomMap(xSize, ySize);
+
+            //TestFuncDepracate();
+
+            //MapSaver.Save(map, @"C:\Schneider Electric\GameLive\Service\ActualMap.txt");
+
+
+
+            //var map = MapSaver.Load(@"C:\Schneider Electric\GameLive\Service\ActualMap.txt");
+
+            //return JsonConvert.SerializeObject(map);
+
+
+            var client = new GameWcfClient("http://localhost:8080/IChatService4");
+
+            client.ResetMap(xSize, ySize);
+
+            return client.GetCurrentMap();
+        }
+
         private void TestFuncDepracate()
         {
             ServiceController myController = new ServiceController("GameService");

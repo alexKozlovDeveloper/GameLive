@@ -12,5 +12,8 @@ namespace GameLive.Core.WcfService
     {
         [OperationContract]
         string GetCurrentMap(string message);
+
+        [OperationContract]
+        void ResetMap(int width, int height);
     }
 }

@@ -46,5 +46,32 @@ namespace GameLive.Core.WcfService
 
             return res;
         }
+
+        public void ResetMap(int width, int heigth)
+        {
+            try
+            {
+                BasicHttpBinding binding = new BasicHttpBinding(); // Привязка
+                binding.MaxBufferSize = 20_000_000;
+                binding.MaxBufferPoolSize = 20_000_000;
+                binding.MaxReceivedMessageSize = 20_000_000;
+                // Создаём конечную точку.
+                EndpointAddress endpoint = new EndpointAddress(_address);
+                // Создаём фабрику каналов.
+                ChannelFactory<IGameWcfService> channelFactory = new ChannelFactory<IGameWcfService>(binding, endpoint);
+                // Создаём канал
+                IGameWcfService channel = channelFactory.CreateChannel();
+                // Отправляем сообщение
+                channel.ResetMap(width, heigth);
+
+                //Console.WriteLine($"from server '{res}'");
+                // После нажатия клавиши клиент завершит свою работу
+                //Console.ReadKey();
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
     }
 }

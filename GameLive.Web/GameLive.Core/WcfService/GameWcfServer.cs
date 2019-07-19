@@ -13,15 +13,14 @@ namespace GameLive.Core.WcfService
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class GameWcfServer : IGameWcfService
     {
-        private ILogger _log;
+        private readonly ILogger _log;
+        private readonly Uri _address;
+        private readonly MapController _mapcontroller;
 
         private Thread _listeningThread;
-
         private bool _isServerWork;
 
-        private readonly Uri _address;
-
-        private MapController _mapcontroller;
+        private int _tickDelay;
 
         public GameWcfServer()
         {
@@ -30,9 +29,11 @@ namespace GameLive.Core.WcfService
 
         public GameWcfServer(string addressUri, ILogger logger, MapController mapcontroller)
         {
-            _address = new Uri(addressUri);
             _log = logger;
+            _address = new Uri(addressUri);
             _mapcontroller = mapcontroller;
+
+            _tickDelay = 100;
         }
 
         public void Start()
@@ -52,8 +53,12 @@ namespace GameLive.Core.WcfService
 
         public string GetCurrentMap(string message)
         {
-            //Console.WriteLine($"Сервер получил сообщение:  {message}");
             return _mapcontroller.GetMapAsJson();
+        }
+
+        public void ResetMap(int width, int height)
+        {
+            _mapcontroller.ResetMap(width, height);
         }
 
         private void ListeningFunction()
@@ -78,7 +83,7 @@ namespace GameLive.Core.WcfService
                 while (_isServerWork)
                 {
                     _log.Info("ListeningFunction working...");
-                    Thread.Sleep(100);
+                    Thread.Sleep(_tickDelay);
                 }
 
                 serviceHost.Close();

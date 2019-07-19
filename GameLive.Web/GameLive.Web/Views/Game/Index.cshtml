@@ -6,7 +6,7 @@
 <div>
     <input id="xSize" type="number" value="50">
     <input id="ySize" type="number" value="50">
-    <div id="mainButton">start</div>
+    <div id="mainButton">Reset</div>
 </div>
 
 <div id="mapDiv"></div>
@@ -14,19 +14,39 @@
 
 <script>
     var serviceURL = '/Game/GetCurrentMapState';
+    var resetServiceURL = '/Game/ResetMap';
 
     $("#mainButton").click(function () {
-        UpdateMap();
+        ResetMap();
     });
 
     window.setInterval(function() {
         UpdateMap();
-    }, 100);
+    }, 5000);
 
     var d = "@Url.Action("GetCurrentMapState", "Game")";
 
     var $allCells;
     var $mainDiv = $("#mapDiv");
+
+    function ResetMap() {
+        var x = $("#xSize")[0].value;
+        var y = $("#ySize")[0].value;
+
+        $.ajax({
+            type: "POST",
+            url: resetServiceURL,
+            data: "{'x':'" + x + "','y':'" + y + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status) {
+                if (data !== "") {
+                    DrawMap(data);
+                }
+            },
+            error: function (e) { }
+        });
+    }
 
     function UpdateMap() {
         var x = $("#xSize")[0].value;
