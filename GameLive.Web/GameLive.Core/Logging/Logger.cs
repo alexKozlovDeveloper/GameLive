@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,9 @@ namespace GameLive.Core.Logging
 
         private readonly Object _lockObject;
 
-        private string FilePath => Path.Combine(_folderPath, $"[{DateTime.Now:MM-dd-yyyy}] ({_id}) Log.txt");
+        private readonly string _loggerName;
+
+        private string FilePath => Path.Combine(_folderPath, $"[{DateTime.Now:MM-dd-yyyy}] {_loggerName} ({_id}) Log.txt");
 
         public Logger(string folderPath, bool writeToConsole = false)
         {
@@ -30,6 +33,8 @@ namespace GameLive.Core.Logging
             }
 
             _lockObject = new object();
+
+            _loggerName = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
         }
 
         public void Error(string message)

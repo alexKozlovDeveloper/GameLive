@@ -58,6 +58,7 @@
     <Compile Include="MapEntityes\MapFactory.cs" />
     <Compile Include="MapEntityes\MapSaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WcfService\BaseWcfClient.cs" />
     <Compile Include="WcfService\GameWcfClient.cs" />
     <Compile Include="WcfService\GameWcfServer.cs" />
     <Compile Include="WcfService\GameWcfService.cs" />

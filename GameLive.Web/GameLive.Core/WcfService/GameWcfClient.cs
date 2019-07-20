@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameLive.Core.WcfService
 {
-    public class GameWcfClient
+    public class GameWcfClient : BaseWcfClient<IGameWcfService>
     {
         private readonly Uri _address;
 
@@ -18,60 +18,16 @@ namespace GameLive.Core.WcfService
 
         public string GetCurrentMap()
         {
-            var res = string.Empty;
+            IGameWcfService channel = GetChannel(_address);
 
-            try
-            {
-                BasicHttpBinding binding = new BasicHttpBinding(); // Привязка
-                binding.MaxBufferSize = 20_000_000;
-                binding.MaxBufferPoolSize = 20_000_000;
-                binding.MaxReceivedMessageSize = 20_000_000;
-                // Создаём конечную точку.
-                EndpointAddress endpoint = new EndpointAddress(_address);
-                // Создаём фабрику каналов.
-                ChannelFactory<IGameWcfService> channelFactory = new ChannelFactory<IGameWcfService>(binding, endpoint);
-                // Создаём канал
-                IGameWcfService channel = channelFactory.CreateChannel();
-                // Отправляем сообщение
-                res = channel.GetCurrentMap("From client");
-
-                //Console.WriteLine($"from server '{res}'");
-                // После нажатия клавиши клиент завершит свою работу
-                //Console.ReadKey();
-            }
-            catch (Exception e)
-            {
-                
-            }
-
-            return res;
+            return channel.GetCurrentMap("From client");
         }
 
         public void ResetMap(int width, int heigth)
         {
-            try
-            {
-                BasicHttpBinding binding = new BasicHttpBinding(); // Привязка
-                binding.MaxBufferSize = 20_000_000;
-                binding.MaxBufferPoolSize = 20_000_000;
-                binding.MaxReceivedMessageSize = 20_000_000;
-                // Создаём конечную точку.
-                EndpointAddress endpoint = new EndpointAddress(_address);
-                // Создаём фабрику каналов.
-                ChannelFactory<IGameWcfService> channelFactory = new ChannelFactory<IGameWcfService>(binding, endpoint);
-                // Создаём канал
-                IGameWcfService channel = channelFactory.CreateChannel();
-                // Отправляем сообщение
-                channel.ResetMap(width, heigth);
+            IGameWcfService channel = GetChannel(_address);
 
-                //Console.WriteLine($"from server '{res}'");
-                // После нажатия клавиши клиент завершит свою работу
-                //Console.ReadKey();
-            }
-            catch (Exception e)
-            {
-
-            }
+            channel.ResetMap(width, heigth);
         }
     }
 }
