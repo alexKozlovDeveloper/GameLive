@@ -14,12 +14,12 @@ namespace SecondWindowsService
         /// </summary>
         static void Main()
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[]
+            var servicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new GameWindowService()
             };
-            ServiceBase.Run(ServicesToRun);
+
+            ServiceBase.Run(servicesToRun);
         }
     }
 }

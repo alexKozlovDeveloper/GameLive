@@ -68,7 +68,7 @@ namespace GameLive.Service
             //    {
             //        lock (_mapAccessLock)
             //        {
-            //            _mapController.NextTic();
+            //            _mapController.NextTick();
             //        }
 
             //        MapSaver.Save(_mapController.Map, @"C:\Schneider Electric\GameLive\Service\ActualMap.txt");

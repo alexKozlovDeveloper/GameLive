@@ -9,7 +9,7 @@ namespace GameLive.Core.MapEntityes
 {
     public class MapController
     {
-        private readonly Object _lock = new object();
+        private readonly object _lock = new object();
 
         public Map Map { get; private set; }
 
@@ -18,10 +18,8 @@ namespace GameLive.Core.MapEntityes
             Map = map;
         }
 
-        public void NextTic()
+        public void NextTick()
         {
-            var rnd = new Random();
-
             lock (_lock)
             {
                 var newCells = new List<List<MapCell>>();
@@ -36,14 +34,11 @@ namespace GameLive.Core.MapEntityes
 
                         var aliveCount = GetAliveCount(neighboringCell);
 
-                        var newCell = new MapCell()
+                        var newCell = new MapCell
                         {
                             X = mapCell.X,
                             Y = mapCell.Y
                         };
-
-                        //newCell.Age = mapCell.Age + 1;
-                        //newCell.Status = mapCell.Status;
 
                         if (mapCell.Status == CellStatus.Dead && aliveCount == 3)
                         {
@@ -62,13 +57,6 @@ namespace GameLive.Core.MapEntityes
                         }
 
                         newRow.Add(newCell);
-                        //newRow.Add(new MapCell()
-                        //{
-                        //    X = mapCell.X,
-                        //    Y = mapCell.Y,
-                        //    Age = rnd.Next(4),
-                        //    Status = (CellStatus)rnd.Next(2)
-                        //});
                     }
 
                     newCells.Add(newRow);

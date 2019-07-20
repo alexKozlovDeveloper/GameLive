@@ -35,6 +35,7 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseLoggerObject.cs" />
+    <Compile Include="Configuration\ConfigHelper.cs" />
+    <Compile Include="Configuration\KeyWords.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="MapEntityes\CellStatus.cs" />
@@ -58,6 +62,7 @@
     <Compile Include="WcfService\GameWcfServer.cs" />
     <Compile Include="WcfService\GameWcfService.cs" />
     <Compile Include="WcfService\IGameWcfService.cs" />
+    <Compile Include="WindowsService\IServiceComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

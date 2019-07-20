@@ -11,9 +11,8 @@ using GameLive.Core.MapEntityes;
 namespace GameLive.Core.WcfService
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-    public class GameWcfServer : IGameWcfService
+    public class GameWcfServer : BaseLoggerObject, IGameWcfService
     {
-        private readonly ILogger _log;
         private readonly Uri _address;
         private readonly MapController _mapcontroller;
 
@@ -22,14 +21,8 @@ namespace GameLive.Core.WcfService
 
         private int _tickDelay;
 
-        public GameWcfServer()
+        public GameWcfServer(string addressUri, ILogger logger, MapController mapcontroller) : base(logger)
         {
-            
-        }
-
-        public GameWcfServer(string addressUri, ILogger logger, MapController mapcontroller)
-        {
-            _log = logger;
             _address = new Uri(addressUri);
             _mapcontroller = mapcontroller;
 
@@ -38,7 +31,7 @@ namespace GameLive.Core.WcfService
 
         public void Start()
         {
-            _log.Info("Starting GameWcfServer...");
+            Logger.Info("Starting GameWcfServer...");
             _isServerWork = true;
 
             _listeningThread = new Thread(ListeningFunction);
@@ -47,7 +40,7 @@ namespace GameLive.Core.WcfService
 
         public void Stop()
         {
-            _log.Info("Stoping GameWcfServer...");
+            Logger.Info("Stoping GameWcfServer...");
             _isServerWork = false;
         }
 
@@ -78,11 +71,11 @@ namespace GameLive.Core.WcfService
                 serviceHost.AddServiceEndpoint(contract, binding, _address);
                 // Запускаем наш хост
                 serviceHost.Open();
-                _log.Info("Сервер запущен.");
+                Logger.Info("Сервер запущен.");
 
                 while (_isServerWork)
                 {
-                    _log.Info("ListeningFunction working...");
+                    Logger.Info("ListeningFunction working...");
                     Thread.Sleep(_tickDelay);
                 }
 
@@ -91,7 +84,7 @@ namespace GameLive.Core.WcfService
             }
             catch (Exception e)
             {
-                _log.Error(e.Message);
+                Logger.Error(e.Message);
             }
         }
 
