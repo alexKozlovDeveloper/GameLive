@@ -159,3 +159,7 @@ $RECYCLE.BIN/
 AdamDemo.Web.Studio/Uploads
 
 *.orig
+GameLive.Web/.vs/GameLive.Web/v15/Server/sqlite3/storage.ide-wal
+GameLive.Web/.vs/GameLive.Web/v15/Server/sqlite3/storage.ide
+GameLive.Web/.vs/GameLive.Web/v15/Server/sqlite3/db.lock
+GameLive.Web/.vs/GameLive.Web/v15/Server/sqlite3/storage.ide-shm
