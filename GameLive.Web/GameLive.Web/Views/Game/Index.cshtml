@@ -24,7 +24,7 @@
         UpdateMap();
     }, 200);
 
-    var d = "@Url.Action("GetCurrentMapState", "Game")";
+    //var d = "@Url.Action("GetCurrentMapState", "Game")";
 
     var $allCells;
     var $mainDiv = $("#mapDiv");
@@ -55,7 +55,6 @@
         $.ajax({
             type: "POST",
             url: serviceURL,
-            data: "{'x':'" + x + "','y':'" + y + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data, status) {

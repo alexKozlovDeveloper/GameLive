@@ -1,4 +1,4 @@
-﻿namespace SecondWindowsService
+﻿namespace GameLive.WindowsService
 {
     partial class ProjectInstaller
     {

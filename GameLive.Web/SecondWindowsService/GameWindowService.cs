@@ -1,24 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceModel;
 using System.ServiceProcess;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using GameLive.Core.Configuration;
 using GameLive.Core.Interfaces;
 using GameLive.Core.Logging;
-using GameLive.Core.MapEntityes;
-using GameLive.Core.WcfService;
 using GameLive.Core.WcfService.Server;
 using GameLive.Core.WindowsService;
-using Newtonsoft.Json;
 
-namespace SecondWindowsService
+namespace GameLive.WindowsService
 {
     public partial class GameWindowService : ServiceBase
     {

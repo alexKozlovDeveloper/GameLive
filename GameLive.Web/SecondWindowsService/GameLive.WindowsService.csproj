@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{18A1D477-1F41-4F47-8D1F-09C06AB229A8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SecondWindowsService</RootNamespace>
-    <AssemblyName>SecondWindowsService</AssemblyName>
+    <RootNamespace>GameLive.WindowsService</RootNamespace>
+    <AssemblyName>GameLive.WindowsService</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

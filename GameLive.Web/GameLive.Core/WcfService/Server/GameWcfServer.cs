@@ -65,7 +65,7 @@ namespace GameLive.Core.WcfService.Server
         }
 
 
-        public string GetCurrentMap(string message)
+        public string GetCurrentMap()
         {
             return _mapcontroller.GetMapAsJson();
         }

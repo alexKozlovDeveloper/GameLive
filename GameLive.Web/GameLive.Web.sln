@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLive.Web", "GameLive.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLive.Core", "GameLive.Core\GameLive.Core.csproj", "{900D5B0B-019C-4673-8D57-6B2EF9E8FA93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLive.Service", "GameLive.Service\GameLive.Service.csproj", "{BF72C62C-4241-4100-BB5E-C47224742931}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLive.Service [deprecated]", "GameLive.Service\GameLive.Service [deprecated].csproj", "{BF72C62C-4241-4100-BB5E-C47224742931}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLive.TestServerConsole", "GameLive.TestServerConsole\GameLive.TestServerConsole.csproj", "{88EEE332-AF25-4D3F-A583-FB32891A94E9}"
 EndProject
@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLive.TestClientConsole"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestingProjects", "TestingProjects", "{61D3E14C-ABF4-4FCD-9DFA-FFD6936D8195}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondWindowsService", "SecondWindowsService\SecondWindowsService.csproj", "{18A1D477-1F41-4F47-8D1F-09C06AB229A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLive.WindowsService", "SecondWindowsService\GameLive.WindowsService.csproj", "{18A1D477-1F41-4F47-8D1F-09C06AB229A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

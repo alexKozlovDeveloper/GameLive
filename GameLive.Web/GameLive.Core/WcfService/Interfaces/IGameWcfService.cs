@@ -6,7 +6,7 @@ namespace GameLive.Core.WcfService.Interfaces
     public interface IGameWcfService
     {
         [OperationContract]
-        string GetCurrentMap(string message);
+        string GetCurrentMap();
 
         [OperationContract]
         void ResetMap(int width, int height);

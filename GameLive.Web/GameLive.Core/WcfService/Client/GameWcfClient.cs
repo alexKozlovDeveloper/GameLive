@@ -16,7 +16,7 @@ namespace GameLive.Core.WcfService.Client
         {
             IGameWcfService channel = GetChannel(_address);
 
-            return channel.GetCurrentMap("From client");
+            return channel.GetCurrentMap();
         }
 
         public void ResetMap(int width, int heigth)
