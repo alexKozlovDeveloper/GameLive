@@ -68,6 +68,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="ReInstallService.bat" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameLive.Core\GameLive.Core.csproj">

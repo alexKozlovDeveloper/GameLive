@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameLive.Core.Interfaces;
 
 namespace GameLive.Core.Logging
@@ -16,11 +12,11 @@ namespace GameLive.Core.Logging
         private readonly string _folderPath;
         private readonly bool _writeToConsole;
 
-        private readonly Object _lockObject;
+        private readonly object _lockObject;
 
         private readonly string _loggerName;
 
-        private string FilePath => Path.Combine(_folderPath, $"[{DateTime.Now:MM-dd-yyyy}] {_loggerName} ({_id}) Log.txt");
+        private string FilePath => Path.Combine(_folderPath, $"[{DateTime.Now:MM-dd-yyyy}] [{_loggerName}] Log.txt");
 
         public Logger(string folderPath, bool writeToConsole = false)
         {
@@ -36,7 +32,7 @@ namespace GameLive.Core.Logging
 
             _loggerName = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
         }
-
+        
         public void Error(string message)
         {
             Write("ERROR: " + message);
@@ -54,7 +50,7 @@ namespace GameLive.Core.Logging
 
         private void Write(string message)
         {
-            message = $"[{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss.ffff")}] " + message;
+            message = $"[{DateTime.Now:MM/dd/yyyy HH:mm:ss.ffff}] " + message;
 
             WriteToFile(message);
             WriteToConsole(message);
@@ -62,7 +58,7 @@ namespace GameLive.Core.Logging
 
         private void WriteToConsole(string message)
         {
-            if (_writeToConsole == true)
+            if (_writeToConsole)
             {
                 Console.WriteLine(message);
             }

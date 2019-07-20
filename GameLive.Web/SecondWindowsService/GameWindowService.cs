@@ -14,6 +14,7 @@ using GameLive.Core.Interfaces;
 using GameLive.Core.Logging;
 using GameLive.Core.MapEntityes;
 using GameLive.Core.WcfService;
+using GameLive.Core.WcfService.Server;
 using GameLive.Core.WindowsService;
 using Newtonsoft.Json;
 

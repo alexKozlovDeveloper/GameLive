@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace GameLive.Core.MapEntityes
@@ -66,9 +62,10 @@ namespace GameLive.Core.MapEntityes
             }
         }
 
+        //TODO: remove this method to another class
         public string GetMapAsJson()
         {
-            var result = string.Empty;
+            string result;
 
             lock (_lock)
             {
@@ -78,11 +75,8 @@ namespace GameLive.Core.MapEntityes
             return result;
         }
 
-        public void ResetMap(int width, int height)
+        public void ResetMap(Map newMap)
         {
-            var mapFactory = new MapFactory();
-            var newMap = mapFactory.GetRandomMap(width, height);
-
             lock (_lock)
             {
                 Map = newMap;

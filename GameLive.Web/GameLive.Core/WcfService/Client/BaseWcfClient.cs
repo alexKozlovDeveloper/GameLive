@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GameLive.Core.WcfService
+namespace GameLive.Core.WcfService.Client
 {
     public abstract class BaseWcfClient<T>
     {

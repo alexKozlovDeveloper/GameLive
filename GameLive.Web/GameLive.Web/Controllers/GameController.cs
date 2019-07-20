@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using GameLive.Core.MapEntityes;
 using GameLive.Core.WcfService;
+using GameLive.Core.WcfService.Client;
 using Newtonsoft.Json;
 
 namespace GameLive.Web.Controllers

@@ -8,14 +8,9 @@ using System.Threading.Tasks;
 
 namespace GameLive.Core.MapEntityes
 {
+    [Obsolete]
     public static class MapSaver
     {
-        //public static void Save(Map map, string filePath)
-        //{
-        //    var str = JsonConvert.SerializeObject(map);
-        //    File.WriteAllText(filePath, str);
-        //}
-
         public static void Save(Map map, string filePath)
         {
             var lines = new List<string>();
