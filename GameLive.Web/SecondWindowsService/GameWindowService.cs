@@ -14,6 +14,7 @@ using GameLive.Core.Interfaces;
 using GameLive.Core.Logging;
 using GameLive.Core.MapEntityes;
 using GameLive.Core.WcfService;
+using GameLive.Core.WindowsService;
 using Newtonsoft.Json;
 
 namespace SecondWindowsService
@@ -23,18 +24,22 @@ namespace SecondWindowsService
         private readonly ILogger _log;
         private readonly int _tickDelay;
 
+        private readonly List<IServiceComponent> _serviceComponents;
+
         private bool _isWork;
         private Thread _mainServiceThread;
-        private GameWcfServer _server;
-        private MapController _mapController;
-
+        
         public GameWindowService()
         {
             InitializeComponent();
 
             _log = new Logger(ConfigHelper.LogFolder);
-
             _tickDelay = ConfigHelper.GameWindowServiceTickDelay;
+
+            _serviceComponents = new List<IServiceComponent>
+            {
+                new GameWcfServer(ConfigHelper.WcfServiceUri, ConfigHelper.DefaultMapWidth, ConfigHelper.DefaultMapHeight, _log)
+            };
         }
 
         protected override void OnStart(string[] args)
@@ -43,18 +48,15 @@ namespace SecondWindowsService
 
             try
             {
-                var mapFactory = new MapFactory();
-                var map = mapFactory.GetRandomMap(ConfigHelper.DefaultMapWidth, ConfigHelper.DefaultMapHeight);
-                _mapController = new MapController(map);
-
-                _server = new GameWcfServer(ConfigHelper.WcfServiceUri, _log, _mapController);
-
                 _isWork = true;
 
-                _mainServiceThread = new Thread(MainServiceFunction);
-                _mainServiceThread.Start();
+                foreach (var serviceComponent in _serviceComponents)
+                {
+                    serviceComponent.Start();
+                }
 
-                _server.Start();
+                _mainServiceThread = new Thread(TickServiceFunction);
+                _mainServiceThread.Start();
             }
             catch (Exception e)
             {
@@ -70,8 +72,11 @@ namespace SecondWindowsService
 
             try
             {
-                _server.Stop();
-                
+                foreach (var serviceComponent in _serviceComponents)
+                {
+                    serviceComponent.Stop();
+                }
+
                 _isWork = false;
 
                 Thread.Sleep(_tickDelay * 2);
@@ -84,7 +89,7 @@ namespace SecondWindowsService
             _log.Info("GameWindowService stoped.");
         }
 
-        private void MainServiceFunction()
+        private void TickServiceFunction()
         {
             _log.Info("Main GameWindowService function started.");
 
@@ -93,7 +98,12 @@ namespace SecondWindowsService
                 while (_isWork)
                 {
                     _log.Info("Next GameWindowService tick...");
-                    _mapController.NextTick();
+
+                    foreach (var serviceComponent in _serviceComponents)
+                    {
+                        serviceComponent.NextTick(_tickDelay);
+                    }
+
                     Thread.Sleep(_tickDelay);
                 }
             }

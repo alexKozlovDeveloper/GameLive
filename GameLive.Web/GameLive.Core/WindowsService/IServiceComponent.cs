@@ -10,6 +10,6 @@ namespace GameLive.Core.WindowsService
     {
         void Start();
         void Stop();
-        void NextTick();
+        void NextTick(int millisecondsTickDelay);
     }
 }
