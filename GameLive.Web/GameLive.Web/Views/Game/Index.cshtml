@@ -1,0 +1,132 @@
+﻿
+<h2>Live:</h2>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/Content/MapStyles.css" rel="stylesheet" />
+<div>
+    <input id="xSize" type="number" value="50">
+    <input id="ySize" type="number" value="50">
+    <div id="mainButton">Reset</div>
+</div>
+
+<div id="mapDiv"></div>
+<div id="error"></div>
+
+<script>
+    var serviceURL = '/Game/GetCurrentMapState';
+    var resetServiceURL = '/Game/ResetMap';
+
+    $("#mainButton").click(function () {
+        ResetMap();
+    });
+
+    window.setInterval(function() {
+        UpdateMap();
+    }, 200);
+
+    //var d = "@Url.Action("GetCurrentMapState", "Game")";
+
+    var $allCells;
+    var $mainDiv = $("#mapDiv");
+
+    function ResetMap() {
+        var x = $("#xSize")[0].value;
+        var y = $("#ySize")[0].value;
+
+        $.ajax({
+            type: "POST",
+            url: resetServiceURL,
+            data: "{'x':'" + x + "','y':'" + y + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status) {
+                if (data !== "") {
+                    DrawMap(data);
+                }
+            },
+            error: function (e) { }
+        });
+    }
+
+    function UpdateMap() {
+        var x = $("#xSize")[0].value;
+        var y = $("#ySize")[0].value;
+
+        $.ajax({
+            type: "POST",
+            url: serviceURL,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status) {
+                if (data !== "") {
+                    DrawMap(data);
+                }
+            },
+            error: function (e) { }
+        });
+    }
+
+    function DrawMap(data) {
+
+        if ($mainDiv[0].innerHTML !== "") {
+            UpdateMapContent(data);
+            return;
+        }
+
+        var mapHtml = "<table>";
+
+        for (var x = 0; x < data.Cells.length; x++) {
+            mapHtml += "<tr>";
+            var row = data.Cells[x];
+
+            for (var y = 0; y < row.length; y++) {
+                var cell = row[y];
+
+                var statusClass = cell.Status === 1 ? "cell-alive" : "cell-dead";
+
+                if (cell.Age === 1) {
+                    statusClass += " old";
+                } else if (cell.Age > 1) {
+                    statusClass += " so-old";
+                }
+
+                mapHtml += "<td id='cell" + cell.X + "x" + cell.Y + "' class='map-cell " + statusClass + "'></td>";
+            }
+
+            mapHtml += "</tr>";
+        }
+
+        mapHtml += "</table>";
+
+        $mainDiv.empty();
+        $mainDiv.append(mapHtml);
+
+        $allCells = $(".map-cell");
+    }
+
+    function UpdateMapContent(data) {
+
+        $allCells.removeAttr('class');
+
+        for (var x = 0; x < data.Cells.length; x++) {
+            var row = data.Cells[x];
+
+            for (var y = 0; y < row.length; y++) {
+                var cell = row[y];
+
+                var statusClass = cell.Status === 1 ? "cell-alive" : "cell-dead";
+
+                if (cell.Age === 1) {
+                    statusClass += " old";
+                } else if (cell.Age > 1) {
+                    statusClass += " so-old";
+                }
+                var id = "cell" + cell.X + "x" + cell.Y;
+                var $htmlCell = $mainDiv.find("#" + id);
+                
+                $htmlCell.addClass("map-cell " + statusClass);
+            }
+        }
+    }
+</script>
+

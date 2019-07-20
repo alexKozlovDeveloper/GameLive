@@ -1,0 +1,4 @@
+﻿https://manage.accuwebhosting.com/knowledgebase/2886/How-to-configure-IIS-to-access-website-using-IP-address.html
+https://alekseygulynin.ru/wcf-delaem-formu-sluzhboj/
+https://metanit.com/sharp/aspnet5/20.1.php
+
