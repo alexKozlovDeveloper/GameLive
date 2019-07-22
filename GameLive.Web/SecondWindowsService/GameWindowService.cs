@@ -29,7 +29,8 @@ namespace GameLive.WindowsService
 
             _serviceComponents = new List<IServiceComponent>
             {
-                new GameWcfServer(ConfigHelper.WcfServiceUri, ConfigHelper.DefaultMapWidth, ConfigHelper.DefaultMapHeight, _log)
+                new GameWcfServer(ConfigHelper.WcfServiceUri, ConfigHelper.DefaultMapWidth, ConfigHelper.DefaultMapHeight, _log),
+                new ArenaWcfServer(ConfigHelper.ArenaWcfServiceUri, _log)
             };
         }
 

@@ -158,7 +158,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Arena\Arena.css" />
-    <Content Include="Content\Arena\Images\Arasari Star Ship [without background].png">
+    <Content Include="Content\Arena\Images\Arasari Star Ship.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Arena\Images\Butterfly Star Ship.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Arena\Images\Flamingo Star Ship.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Arena\Images\Piranha Star Ship.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Arena\Images\Skat Star Ship.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />

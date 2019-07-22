@@ -3,35 +3,217 @@
 
 }
 
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
 <link href="~/Content/Arena/Arena.css" rel="stylesheet" />
 
 <h2>Welcome to <h2 class="arena-title">ARENA</h2></h2>
 
 <style>
 
-    .piranha-star-ship {
-        width: 20px;
-        height: 20px;
-        background-color: aqua;
-        background-image: url('~/Content/Arena/Images/Arasari Star Ship [without background].png');
+    .star-ship {
+        width: 0px;
+        height: 0px;
     }
 
-    #starships {
+        .star-ship img {
+            width: 50px;
+            height: 50px;
+        }
+
+    .starships-arena {
         width: 500px;
         height: 500px;
         background-color: black;
     }
 </style>
 
-<div id="starships">
-    <div class="piranha-star-ship">
-        <img src="~/Content/Arena/Images/Arasari Star Ship [without background].png" />
-    </div>
+@*position: absolute;
+    left: 100px;
+    top: 150px;*@
+
+<div class="starships-arena">
+    @*<div class="star-ship">
+            <img src="~/Content/Arena/Images/Arasari Star Ship.png" />
+        </div>
+        <div class="star-ship">
+            <img src="~/Content/Arena/Images/Butterfly Star Ship.png" />
+        </div>
+        <div class="star-ship">
+            <img src="~/Content/Arena/Images/Flamingo Star Ship.png" />
+        </div>
+        <div class="star-ship">
+            <img src="~/Content/Arena/Images/Piranha Star Ship.png" />
+        </div>
+        <div class="star-ship">
+            <img src="~/Content/Arena/Images/Skat Star Ship.png" />
+        </div>*@
 
 </div>
 
-<script>
+<div class="keystate-right"></div>
+<div class="keystate-left"></div>
+<div class="keystate-up"></div>
+<div class="keystate-down"></div>
 
+<script>
+    //    transform: rotate(-195deg);
+    var angle = 0;
+
+    function Move(userId) {
+        $.ajax({
+            type: "POST",
+            url: '/Arena/Move',
+            data: "{'userId':'" + userId + "', 'keyStateString':'Up, Down, Left, Right, IsAttack'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status) {
+                //debugger;
+
+            },
+            error: function (e) {
+                //debugger;
+
+            }
+        });
+    }
+
+    function GetUsers() {
+        $.ajax({
+            type: "POST",
+            url: '/Arena/GetUsers',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status) {
+                //debugger;
+
+                var user1 = data[0];
+
+
+            },
+            error: function (e) {
+                //debugger;
+
+            }
+        });
+    }
+
+    function AddUser(name) {
+        var result = "";
+
+        $.ajax({
+            type: "POST",
+            url: '/Arena/AddUser',
+            async: false,
+            data: "{'name':'" + name + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status) {
+                //debugger;
+                result = data;
+            },
+            error: function (e) {
+                //debugger;
+                result = e.responseText;
+            }
+        });
+
+        return result;
+    }
+
+    function GetStarShipDiv(shipName, userId) {
+        var divStr = "<div class='star-ship'>";
+        divStr += "<img id='" + userId + "' src='/Content/Arena/Images/" + shipName + ".png' />";
+        divStr += "</div>";
+
+        return divStr;
+    }
+
+    //debugger;
+    var userId = AddUser("new test user");
+    //debugger;
+    var starShip = GetStarShipDiv("Arasari Star Ship", userId);
+    //debugger;
+    $(".starships-arena").append(starShip);
+
+    window.setInterval(function () {
+        $("#starships-image").css('transform', 'rotate(-' + angle + 'deg)');
+        angle++;
+    }, 500);
+
+    window.setInterval(function () {
+        GetUsers();
+    }, 5000);
+
+    Window.userId = "empty";
+
+
+
+
+
+
+
+
+
+    function SetupKeyListener() {
+
+        window.keyState = {
+            'Down': false,
+            'Up': false,
+            'Left': false,
+            'Right': false
+        }
+
+        $(document).keydown(function (event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+
+            if (keycode === 68) {
+                window.keyState.Right = true;
+            }
+            if (keycode === 87) {
+                window.keyState.Up = true;
+            }
+            if (keycode === 83) {
+                window.keyState.Down = true;
+            }
+            if (keycode === 65) {
+                window.keyState.Left = true;
+            }
+        });
+
+        $(document).keyup(function (event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+
+            if (keycode === 68) {
+                window.keyState.Right = false;
+            }
+            if (keycode === 87) {
+                window.keyState.Up = false;
+            }
+            if (keycode === 83) {
+                window.keyState.Down = false;
+            }
+            if (keycode === 65) {
+                window.keyState.Left = false;
+            }
+        });
+
+        window.setInterval(function () {
+            $(".keystate-right").text('right ' + window.keyState.Right);
+            $(".keystate-left").text('left ' + window.keyState.Left);
+            $(".keystate-up").text('up ' + window.keyState.Up);
+            $(".keystate-down").text('down ' + window.keyState.Down);
+        }, 20);
+    }
+
+    SetupKeyListener();
+
+    //$('.starships-arena').bind('keypress', function (e) {
+    //    debugger;
+    //    if(e.keyCode === 13){
+    //        // Enter pressed... do anything here...
+    //    }
+    //});
 
 
 

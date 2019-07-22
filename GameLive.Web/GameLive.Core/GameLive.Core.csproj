@@ -37,6 +37,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arena\KeyState.cs" />
+    <Compile Include="Arena\Position.cs" />
+    <Compile Include="Arena\UserInfo.cs" />
     <Compile Include="BaseLoggerObject.cs" />
     <Compile Include="Configuration\ConfigHelper.cs" />
     <Compile Include="Configuration\KeyWords.cs" />
@@ -58,8 +63,11 @@
     <Compile Include="MapEntityes\MapFactory.cs" />
     <Compile Include="MapEntityes\MapSaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WcfService\Client\ArenaWcfClient.cs" />
     <Compile Include="WcfService\Client\BaseWcfClient.cs" />
     <Compile Include="WcfService\Client\GameWcfClient.cs" />
+    <Compile Include="WcfService\Interfaces\IArenaWcfService.cs" />
+    <Compile Include="WcfService\Server\ArenaWcfServer.cs" />
     <Compile Include="WcfService\Server\GameWcfServer.cs" />
     <Compile Include="WcfService\Interfaces\IGameWcfService.cs" />
     <Compile Include="WindowsService\IServiceComponent.cs" />
