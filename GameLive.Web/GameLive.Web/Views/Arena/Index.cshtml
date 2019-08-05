@@ -51,75 +51,43 @@
 
 </div>
 
+<div id="users"></div>
+
 <div class="keystate-right"></div>
 <div class="keystate-left"></div>
 <div class="keystate-up"></div>
 <div class="keystate-down"></div>
 
+<script src="~/Scripts/Arena/GameController.js"></script>
+
 <script>
     //    transform: rotate(-195deg);
     var angle = 0;
 
-    function Move(userId) {
-        $.ajax({
-            type: "POST",
-            url: '/Arena/Move',
-            data: "{'userId':'" + userId + "', 'keyStateString':'Up, Down, Left, Right, IsAttack'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data, status) {
-                //debugger;
+    
+    
+    //function AddUser(name) {
+    //    var result = "";
 
-            },
-            error: function (e) {
-                //debugger;
+    //    $.ajax({
+    //        type: "POST",
+    //        url: '/Arena/AddUser',
+    //        async: false,
+    //        data: "{'name':'" + name + "'}",
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "json",
+    //        success: function (data, status) {
+    //            //debugger;
+    //            result = data;
+    //        },
+    //        error: function (e) {
+    //            //debugger;
+    //            result = e.responseText;
+    //        }
+    //    });
 
-            }
-        });
-    }
-
-    function GetUsers() {
-        $.ajax({
-            type: "POST",
-            url: '/Arena/GetUsers',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data, status) {
-                //debugger;
-
-                var user1 = data[0];
-
-
-            },
-            error: function (e) {
-                //debugger;
-
-            }
-        });
-    }
-
-    function AddUser(name) {
-        var result = "";
-
-        $.ajax({
-            type: "POST",
-            url: '/Arena/AddUser',
-            async: false,
-            data: "{'name':'" + name + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data, status) {
-                //debugger;
-                result = data;
-            },
-            error: function (e) {
-                //debugger;
-                result = e.responseText;
-            }
-        });
-
-        return result;
-    }
+    //    return result;
+    //}
 
     function GetStarShipDiv(shipName, userId) {
         var divStr = "<div class='star-ship'>";
@@ -129,8 +97,7 @@
         return divStr;
     }
 
-    //debugger;
-    var userId = AddUser("new test user");
+    
     //debugger;
     var starShip = GetStarShipDiv("Arasari Star Ship", userId);
     //debugger;
@@ -141,17 +108,9 @@
         angle++;
     }, 500);
 
-    window.setInterval(function () {
-        GetUsers();
-    }, 5000);
+    
 
     Window.userId = "empty";
-
-
-
-
-
-
 
 
 
@@ -198,15 +157,28 @@
             }
         });
 
+        /*
         window.setInterval(function () {
             $(".keystate-right").text('right ' + window.keyState.Right);
             $(".keystate-left").text('left ' + window.keyState.Left);
             $(".keystate-up").text('up ' + window.keyState.Up);
             $(".keystate-down").text('down ' + window.keyState.Down);
         }, 20);
+        */
     }
 
     SetupKeyListener();
+
+    
+    
+    debugger;
+
+    window.setInterval(function () {
+        window.gameController.getUsers();
+    }, 5000);
+
+    //debugger;
+    var userId = gameController.addUser("new test user");
 
     //$('.starships-arena').bind('keypress', function (e) {
     //    debugger;
