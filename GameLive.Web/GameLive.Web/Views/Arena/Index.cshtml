@@ -3,6 +3,8 @@
 
 }
 
+
+
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 
 <link href="~/Content/Arena/Arena.css" rel="stylesheet" />
@@ -16,10 +18,10 @@
         height: 0px;
     }
 
-        .star-ship img {
-            width: 50px;
-            height: 50px;
-        }
+    .star-ship img {
+        width: 50px;
+        height: 50px;
+    }
 
     .starships-arena {
         width: 500px;
@@ -27,6 +29,15 @@
         background-color: black;
     }
 </style>
+
+<div>
+    <h2 id="userNameDiscription">Enter your name:</h2>
+    <input id="userNameInput" type="text" size="40">
+    <input id="userNameLogin" type="submit" value="Let's Go!">
+    <input id="userNameLogout" type="submit" style="visibility: hidden" value="Logout!">
+</div>
+
+
 
 @*position: absolute;
     left: 100px;
@@ -48,11 +59,10 @@
         <div class="star-ship">
             <img src="~/Content/Arena/Images/Skat Star Ship.png" />
         </div>*@
-
 </div>
 
 <div id="users"></div>
-
+<div id="keyState"></div>
 <div class="keystate-right"></div>
 <div class="keystate-left"></div>
 <div class="keystate-up"></div>
@@ -64,8 +74,40 @@
     //    transform: rotate(-195deg);
     var angle = 0;
 
-    
-    
+    $("#userNameLogin").click(function () {
+        debugger;
+
+        var input = $("#userNameInput")[0];
+
+        if (input.value !== "") {
+            window.gameController.addUser(input.value);
+            //visibility: hidden
+
+            $("#userNameDiscription").css("visibility", "hidden");
+            $("#userNameInput").css("visibility", "hidden");
+            $("#userNameLogin").css("visibility", "hidden");
+            $("#userNameLogout").css("visibility", "visible");
+        }
+    });
+
+    $("#userNameLogout").click(function () {
+        debugger;
+
+        gameController.clearUser();
+
+        $("#userNameDiscription").css("visibility", "visible");
+        $("#userNameInput").css("visibility", "visible");
+        $("#userNameLogin").css("visibility", "visible");
+        $("#userNameLogout").css("visibility", "hidden");
+    });
+
+    var user = JSON.parse(localStorage.getItem('user'));
+
+    if (user !== null) {
+        window.gameController.user = user;
+    }
+
+
     //function AddUser(name) {
     //    var result = "";
 
@@ -89,96 +131,37 @@
     //    return result;
     //}
 
-    function GetStarShipDiv(shipName, userId) {
-        var divStr = "<div class='star-ship'>";
-        divStr += "<img id='" + userId + "' src='/Content/Arena/Images/" + shipName + ".png' />";
-        divStr += "</div>";
 
-        return divStr;
-    }
 
-    
-    //debugger;
-    var starShip = GetStarShipDiv("Arasari Star Ship", userId);
-    //debugger;
-    $(".starships-arena").append(starShip);
+
+
 
     window.setInterval(function () {
         $("#starships-image").css('transform', 'rotate(-' + angle + 'deg)');
         angle++;
     }, 500);
 
-    
+
 
     Window.userId = "empty";
 
 
 
-    function SetupKeyListener() {
 
-        window.keyState = {
-            'Down': false,
-            'Up': false,
-            'Left': false,
-            'Right': false
-        }
 
-        $(document).keydown(function (event) {
-            var keycode = (event.keyCode ? event.keyCode : event.which);
+    //tupKeyListener();
+    //window.gameController.addUser("new user ak");
 
-            if (keycode === 68) {
-                window.keyState.Right = true;
-            }
-            if (keycode === 87) {
-                window.keyState.Up = true;
-            }
-            if (keycode === 83) {
-                window.keyState.Down = true;
-            }
-            if (keycode === 65) {
-                window.keyState.Left = true;
-            }
-        });
+    window.gameController.init();
 
-        $(document).keyup(function (event) {
-            var keycode = (event.keyCode ? event.keyCode : event.which);
 
-            if (keycode === 68) {
-                window.keyState.Right = false;
-            }
-            if (keycode === 87) {
-                window.keyState.Up = false;
-            }
-            if (keycode === 83) {
-                window.keyState.Down = false;
-            }
-            if (keycode === 65) {
-                window.keyState.Left = false;
-            }
-        });
 
-        /*
-        window.setInterval(function () {
-            $(".keystate-right").text('right ' + window.keyState.Right);
-            $(".keystate-left").text('left ' + window.keyState.Left);
-            $(".keystate-up").text('up ' + window.keyState.Up);
-            $(".keystate-down").text('down ' + window.keyState.Down);
-        }, 20);
-        */
-    }
-
-    SetupKeyListener();
-
-    
-    
-    debugger;
-
-    window.setInterval(function () {
-        window.gameController.getUsers();
-    }, 5000);
+    //window.setInterval(function () {
+    //    window.gameController.getUsers();
+    //}, 500);
 
     //debugger;
-    var userId = gameController.addUser("new test user");
+    //var userId = gameController.addUser("new test user");
 
     //$('.starships-arena').bind('keypress', function (e) {
     //    debugger;

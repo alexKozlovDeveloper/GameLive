@@ -67,6 +67,28 @@ namespace GameLive.Core.WcfService.Server
         {
             Logger.Info("NextTick ArenaWcfServer...");
             //Thread.Sleep(millisecondsTickDelay);
+            
+            //TODO: need to delete
+            //RandomMove();
+        }
+
+        public void RandomMove()
+        {
+            //TODO: need to delete
+
+            var max = 100;
+
+            foreach (var user in _users)
+            {
+                if (user.Value.Position.X < max)
+                {
+                    user.Value.Position.X++;
+                }
+                else
+                {
+                    user.Value.Position.X = 0;
+                }
+            }
         }
 
         public void Move(string userId, KeyState keyState)
