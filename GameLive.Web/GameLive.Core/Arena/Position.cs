@@ -14,16 +14,19 @@ namespace GameLive.Core.Arena
         public int X { get; set; }
         [DataMember]
         public int Y { get; set; }
+        [DataMember]
+        public double Angle { get; set; }
 
         public Position()
         {
             
         }
 
-        public Position(int x, int y)
+        public Position(int x, int y, double angle = 0)
         {
             X = x;
             Y = y;
+            Angle = angle;
         }
     }
 }

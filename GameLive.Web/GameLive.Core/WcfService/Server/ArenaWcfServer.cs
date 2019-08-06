@@ -68,27 +68,6 @@ namespace GameLive.Core.WcfService.Server
             Logger.Info("NextTick ArenaWcfServer...");
             //Thread.Sleep(millisecondsTickDelay);
             
-            //TODO: need to delete
-            //RandomMove();
-        }
-
-        public void RandomMove()
-        {
-            //TODO: need to delete
-
-            var max = 100;
-
-            foreach (var user in _users)
-            {
-                if (user.Value.Position.X < max)
-                {
-                    user.Value.Position.X++;
-                }
-                else
-                {
-                    user.Value.Position.X = 0;
-                }
-            }
         }
 
         public void Move(string userId, KeyState keyState)
@@ -104,22 +83,42 @@ namespace GameLive.Core.WcfService.Server
 
             if ((keyState & KeyState.Up) == KeyState.Up)
             {
-                user.Position.Y += 5;
+                user.Position.Y += 1;
             }
 
             if ((keyState & KeyState.Down) == KeyState.Down)
             {
-                user.Position.Y -= 5;
+                user.Position.Y -= 1;
             }
 
             if ((keyState & KeyState.Left) == KeyState.Left)
             {
-                user.Position.X -= 5;
+                user.Position.X -= 1;
             }
 
             if ((keyState & KeyState.Right) == KeyState.Right)
             {
-                user.Position.X += 5;
+                user.Position.X += 1;
+            }
+
+            if ((keyState & KeyState.ClockwiseRotation) == KeyState.ClockwiseRotation)
+            {
+                user.Position.Angle += 1;
+
+                if (user.Position.Angle > 360)
+                {
+                    user.Position.Angle -= 360;
+                }
+            }
+
+            if ((keyState & KeyState.CounterclockwiseRotation) == KeyState.CounterclockwiseRotation)
+            {
+                user.Position.Angle -= 1;
+
+                if (user.Position.Angle < 0)
+                {
+                    user.Position.Angle += 360;
+                }
             }
         }
 

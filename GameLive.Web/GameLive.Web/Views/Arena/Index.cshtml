@@ -18,10 +18,10 @@
         height: 0px;
     }
 
-    .star-ship img {
-        width: 50px;
-        height: 50px;
-    }
+        .star-ship img {
+            width: 50px;
+            height: 50px;
+        }
 
     .starships-arena {
         width: 500px;
@@ -60,7 +60,8 @@
             <img src="~/Content/Arena/Images/Skat Star Ship.png" />
         </div>*@
 </div>
-
+<div id="mouse-position"></div>
+<div id="user-angle"></div>
 <div id="users"></div>
 <div id="keyState"></div>
 <div class="keystate-right"></div>
@@ -71,106 +72,10 @@
 <script src="~/Scripts/Arena/GameController.js"></script>
 
 <script>
-    //    transform: rotate(-195deg);
-    var angle = 0;
-
-    $("#userNameLogin").click(function () {
-        debugger;
-
-        var input = $("#userNameInput")[0];
-
-        if (input.value !== "") {
-            window.gameController.addUser(input.value);
-            //visibility: hidden
-
-            $("#userNameDiscription").css("visibility", "hidden");
-            $("#userNameInput").css("visibility", "hidden");
-            $("#userNameLogin").css("visibility", "hidden");
-            $("#userNameLogout").css("visibility", "visible");
-        }
-    });
-
-    $("#userNameLogout").click(function () {
-        debugger;
-
-        gameController.clearUser();
-
-        $("#userNameDiscription").css("visibility", "visible");
-        $("#userNameInput").css("visibility", "visible");
-        $("#userNameLogin").css("visibility", "visible");
-        $("#userNameLogout").css("visibility", "hidden");
-    });
-
-    var user = JSON.parse(localStorage.getItem('user'));
-
-    if (user !== null) {
-        window.gameController.user = user;
-    }
 
 
-    //function AddUser(name) {
-    //    var result = "";
-
-    //    $.ajax({
-    //        type: "POST",
-    //        url: '/Arena/AddUser',
-    //        async: false,
-    //        data: "{'name':'" + name + "'}",
-    //        contentType: "application/json; charset=utf-8",
-    //        dataType: "json",
-    //        success: function (data, status) {
-    //            //debugger;
-    //            result = data;
-    //        },
-    //        error: function (e) {
-    //            //debugger;
-    //            result = e.responseText;
-    //        }
-    //    });
-
-    //    return result;
-    //}
-
-
-
-
-
-
-    window.setInterval(function () {
-        $("#starships-image").css('transform', 'rotate(-' + angle + 'deg)');
-        angle++;
-    }, 500);
-
-
-
-    Window.userId = "empty";
-
-
-
-
-
-    //tupKeyListener();
-    //window.gameController.addUser("new user ak");
-
+    
+    
     window.gameController.init();
-
-
-
-    //window.setInterval(function () {
-    //    window.gameController.getUsers();
-    //}, 500);
-
-    //debugger;
-    //var userId = gameController.addUser("new test user");
-
-    //$('.starships-arena').bind('keypress', function (e) {
-    //    debugger;
-    //    if(e.keyCode === 13){
-    //        // Enter pressed... do anything here...
-    //    }
-    //});
-
-
-
 
 </script>
