@@ -19,5 +19,8 @@ namespace GameLive.Core.WcfService.Interfaces
 
         [OperationContract]
         List<UserInfo> GetUsers();
+
+        [OperationContract]
+        List<Bullet> GetBullets();
     }
 }

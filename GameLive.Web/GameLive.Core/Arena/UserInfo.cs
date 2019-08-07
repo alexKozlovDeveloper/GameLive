@@ -16,6 +16,8 @@ namespace GameLive.Core.Arena
         [DataMember]
         public string Name { get; set; }
 
+        public int Cooldown { get; set; }
+
         [DataMember]
         public Position Position { get; set; }
     }

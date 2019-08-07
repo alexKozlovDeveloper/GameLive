@@ -22,6 +22,7 @@ namespace GameLive.Core.WcfService.Server
         private ServiceHost _serviceHost;
 
         private Dictionary<string, UserInfo> _users;
+        private List<Bullet> _bullets;
 
         public ArenaWcfServer(string addressUri, ILogger logger) : base(logger)
         {
@@ -33,6 +34,7 @@ namespace GameLive.Core.WcfService.Server
             Logger.Info("Starting ArenaWcfServer...");
 
             _users = new Dictionary<string, UserInfo>();
+            _bullets = new List<Bullet>();
 
             try
             {
@@ -67,7 +69,32 @@ namespace GameLive.Core.WcfService.Server
         {
             Logger.Info("NextTick ArenaWcfServer...");
             //Thread.Sleep(millisecondsTickDelay);
-            
+
+            var bulletsToRemove = new List<Bullet>();
+
+            foreach (var bullet in _bullets)
+            {
+                bullet.Move();
+                bullet.TimeToLive--;
+
+                if (bullet.TimeToLive <= 0)
+                {
+                    bulletsToRemove.Add(bullet);
+                }
+            }
+
+            foreach (var bullet in bulletsToRemove)
+            {
+                _bullets.Remove(bullet);
+            }
+
+            foreach (var userInfo in _users)
+            {
+                if (userInfo.Value.Cooldown > 0)
+                {
+                    userInfo.Value.Cooldown--;
+                }
+            }
         }
 
         public void Move(string userId, KeyState keyState)
@@ -103,7 +130,7 @@ namespace GameLive.Core.WcfService.Server
 
             if ((keyState & KeyState.ClockwiseRotation) == KeyState.ClockwiseRotation)
             {
-                user.Position.Angle += 1;
+                user.Position.Angle += 2;
 
                 if (user.Position.Angle > 360)
                 {
@@ -113,11 +140,28 @@ namespace GameLive.Core.WcfService.Server
 
             if ((keyState & KeyState.CounterclockwiseRotation) == KeyState.CounterclockwiseRotation)
             {
-                user.Position.Angle -= 1;
+                user.Position.Angle -= 2;
 
                 if (user.Position.Angle < 0)
                 {
                     user.Position.Angle += 360;
+                }
+            }
+
+            if ((keyState & KeyState.IsAttack) == KeyState.IsAttack)
+            {
+                if (user.Cooldown == 0)
+                {
+                    var bullet = new Bullet
+                    {
+                        UserId = user.Id,
+                        TimeToLive = 100,
+                        Position = new Position(user.Position.X, user.Position.Y, user.Position.Angle)
+                    };
+
+                    _bullets.Add(bullet);
+
+                    user.Cooldown = 10;
                 }
             }
         }
@@ -143,6 +187,13 @@ namespace GameLive.Core.WcfService.Server
             Logger.Info($"Processing 'GetUsers'");
 
             return _users.Values.ToList();
+        }
+
+        public List<Bullet> GetBullets()
+        {
+            Logger.Info($"Processing 'GetBullets'");
+
+            return _bullets;
         }
     }
 }

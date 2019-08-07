@@ -37,5 +37,12 @@ namespace GameLive.Core.WcfService.Client
 
             return channel.GetUsers();
         }
+
+        public List<Bullet> GetBullets()
+        {
+            IArenaWcfService channel = GetChannel(_address);
+
+            return channel.GetBullets();
+        }
     }
 }

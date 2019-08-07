@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arena\BaseMapObject.cs" />
+    <Compile Include="Arena\Bullet.cs" />
     <Compile Include="Arena\KeyState.cs" />
     <Compile Include="Arena\Position.cs" />
     <Compile Include="Arena\UserInfo.cs" />

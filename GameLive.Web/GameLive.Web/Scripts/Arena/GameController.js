@@ -23,6 +23,15 @@
 
         return divStr;
     },
+    getBulletDiv: function (bulletName, userId, x, y, angle) {
+        var style = "style = 'position: relative; bottom: " + (-500 + y) + "px; left: " + x + "px; transform: rotate(" + angle + "deg)'";
+
+        var divStr = "<div class='bullet'>";
+        divStr += "<img id='bullet-" + userId + "' src='/Content/Arena/Images/" + bulletName + ".png' " + style + " />";
+        divStr += "</div>";
+
+        return divStr;
+    },
     addUser: function (name) {
         var result = "";
 
@@ -79,25 +88,46 @@
                         }
                     }
 
-                    var starShip = window.gameController.getStarShipDiv("Arasari Star Ship", data[i].Id, data[i].Position.X, data[i].Position.Y, data[i].Position.Angle);
+                    var starShip = window.gameController.getStarShipDiv("Arasari Star Ship", data[i].Id, data[i].Position.X - 25, data[i].Position.Y + 25, data[i].Position.Angle);
 
                     if (i === 1) {
-                        starShip = window.gameController.getStarShipDiv("Butterfly Star Ship", data[i].Id, data[i].Position.X, data[i].Position.Y, data[i].Position.Angle);
+                        starShip = window.gameController.getStarShipDiv("Butterfly Star Ship", data[i].Id, data[i].Position.X - 25, data[i].Position.Y + 25, data[i].Position.Angle);
                     }
 
                     if (i === 2) {
-                        starShip = window.gameController.getStarShipDiv("Flamingo Star Ship", data[i].Id, data[i].Position.X, data[i].Position.Y, data[i].Position.Angle);
+                        starShip = window.gameController.getStarShipDiv("Flamingo Star Ship", data[i].Id, data[i].Position.X - 25, data[i].Position.Y + 25, data[i].Position.Angle);
                     }
 
                     if (i === 3) {
-                        starShip = window.gameController.getStarShipDiv("Piranha Star Ship", data[i].Id, data[i].Position.X, data[i].Position.Y, data[i].Position.Angle);
+                        starShip = window.gameController.getStarShipDiv("Piranha Star Ship", data[i].Id, data[i].Position.X - 25, data[i].Position.Y + 25, data[i].Position.Angle);
                     }
 
                     if (i === 4) {
-                        starShip = window.gameController.getStarShipDiv("Skat Star Ship", data[i].Id, data[i].Position.X, data[i].Position.Y, data[i].Position.Angle);
+                        starShip = window.gameController.getStarShipDiv("Skat Star Ship", data[i].Id, data[i].Position.X - 25, data[i].Position.Y + 25, data[i].Position.Angle);
                     }
 
                     $(".starships-arena").append(starShip);
+                }
+            },
+            error: function (e) {
+                //debugger;
+            }
+        });
+    },
+    getBullets: function () {
+        $.ajax({
+            type: "POST",
+            url: '/Arena/GetBullets',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status) {
+
+                debugger;
+               
+                for (var i = 0; i < data.length; i++) {
+                    var bullet = window.gameController.getBulletDiv("Bullet2", data[i].UserId, data[i].Position.X, data[i].Position.Y, data[i].Position.Angle);
+                    
+                    $(".starships-arena").append(bullet);
                 }
             },
             error: function (e) {
@@ -125,14 +155,18 @@
             keyStateArray.push("Down");
         }
 
-        debugger;
+        if (window.gameController.keyState.IsAttack === true) {
+            keyStateArray.push("IsAttack");
+        }
+
+        //debugger;
         var change = window.gameController.keyState.MouseAngle - window.gameController.user.position.angle;
 
         if (change < 0) {
             change *= -1;
         }
 
-        if (change < 2) {
+        if (change < 4) {
 
         } else {
             if (window.gameController.keyState.MouseAngle > window.gameController.user.position.angle) {
@@ -188,6 +222,7 @@
         Up: false,
         Left: false,
         Right: false,
+        IsAttack: false,
         MouseX: "0",
         MouseY: "0",
         MouseAngle: "0"
@@ -235,6 +270,16 @@
             //$(".keystate-down").text('down ' + JSON.stringify(window.gameController.keyState)); 
             $(".keystate-down").text('down ' + window.gameController.keyState.Down); 
         }, 20);
+
+        $(document).mousedown(function () {
+            window.gameController.keyState.IsAttack = true;
+            $(".keystate-mouse").text("down");
+        }).mouseup(function () {
+            window.gameController.keyState.IsAttack = false;
+            $(".keystate-mouse").text("up");
+        });
+
+        
     },
     init: function () {
         window.setInterval(function () {
@@ -277,6 +322,10 @@
 
         window.setInterval(function () {
             window.gameController.getUsers();
+        }, 50);
+
+        window.setInterval(function () {
+            window.gameController.getBullets();
         }, 50);
 
         window.setInterval(function () {

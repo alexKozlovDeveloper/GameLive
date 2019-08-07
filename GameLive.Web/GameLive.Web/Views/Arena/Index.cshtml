@@ -18,15 +18,35 @@
         height: 0px;
     }
 
-        .star-ship img {
-            width: 50px;
-            height: 50px;
+    .star-ship img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .bullet {
+        width: 0px;
+        height: 0px;
+    }
+
+        .bullet img {
+            width: 5px;
+            height: 20px;
         }
 
     .starships-arena {
         width: 500px;
         height: 500px;
         background-color: black;
+    }
+
+    .noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
     }
 </style>
 
@@ -43,7 +63,7 @@
     left: 100px;
     top: 150px;*@
 
-<div class="starships-arena">
+<div class="starships-arena noselect">
     @*<div class="star-ship">
             <img src="~/Content/Arena/Images/Arasari Star Ship.png" />
         </div>
@@ -68,14 +88,15 @@
 <div class="keystate-left"></div>
 <div class="keystate-up"></div>
 <div class="keystate-down"></div>
+<div class="keystate-mouse"></div>
 
 <script src="~/Scripts/Arena/GameController.js"></script>
 
 <script>
 
 
-    
-    
+
+
     window.gameController.init();
 
 </script>

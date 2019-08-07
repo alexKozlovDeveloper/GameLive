@@ -161,6 +161,12 @@
     <Content Include="Content\Arena\Images\Arasari Star Ship.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Arena\Images\Bullet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Arena\Images\Bullet2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Arena\Images\Butterfly Star Ship.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
