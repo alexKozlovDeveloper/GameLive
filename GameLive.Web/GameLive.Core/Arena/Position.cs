@@ -11,10 +11,10 @@ namespace GameLive.Core.Arena
     public class Position
     {
         [DataMember]
-        public int X { get; set; }
+        public double X { get; set; }
 
         [DataMember]
-        public int Y { get; set; }
+        public double Y { get; set; }
 
         [DataMember]
         public double Angle { get; set; }
@@ -30,7 +30,7 @@ namespace GameLive.Core.Arena
             
         }
 
-        public Position(int x, int y, double angle = 0, double radius = 0)
+        public Position(double x, double y, double angle = 0, double radius = 0)
         {
             X = x;
             Y = y;

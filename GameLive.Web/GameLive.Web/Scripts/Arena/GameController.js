@@ -139,7 +139,7 @@
             dataType: "json",
             success: function (data, status) {
 
-                debugger;
+                //debugger;
                
                 for (var i = 0; i < data.length; i++) {
                     var bullet = window.gameController.getBulletDiv("Bullet2", data[i].UserId, data[i].Position.X, data[i].Position.Y, data[i].Position.Angle);
@@ -355,9 +355,14 @@
             var input = $("#userNameInput")[0];
 
             if (input.value !== "") {
+                debugger;
+
                 window.gameController.addUser(input.value);
 
                 window.gameController.hideLogin();
+
+                //$(".login-container").css("display", "none");
+                $(".title-container").css("display", "none");
             }
         });
 

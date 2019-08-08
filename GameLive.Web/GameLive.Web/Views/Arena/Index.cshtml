@@ -9,62 +9,22 @@
 
 <link href="~/Content/Arena/Arena.css" rel="stylesheet" />
 
-<h2>Welcome to <h2 class="arena-title">ARENA</h2></h2>
 
-<style>
+<div class="title-container">
+    <div class="sub-main-title">
+    </div>
+    <div class="main-title">
+    </div>
+</div>
 
-    .explosion {
-        width: 0px;
-        height: 0px;
-    }
 
-        .explosion img {
-            width: 50px;
-            height: 50px;
-        }
-
-    .star-ship {
-        width: 0px;
-        height: 0px;
-    }
-
-    .star-ship img {
-        width: 50px;
-        height: 50px;
-    }
-
-    .bullet {
-        width: 0px;
-        height: 0px;
-    }
-
-        .bullet img {
-            width: 5px;
-            height: 20px;
-        }
-
-    .starships-arena {
-        width: 500px;
-        height: 500px;
-        background-color: black;
-    }
-
-    .noselect {
-        -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-        user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
-    }
-</style>
-
-<div>
-    <h2 id="userNameDiscription">Enter your name:</h2>
-    <input id="userNameInput" type="text" size="40">
-    <input id="userNameLogin" type="submit" value="Let's Go!">
-    <input id="userNameLogout" type="submit" style="visibility: hidden" value="Logout!">
+<div class="login-container">
+    <h2 class="enter-name-title login-item" id="userNameDiscription"></h2>
+    <input class="login-item" id="userNameInput" type="text" size="40">
+    @*<input id="userNameLogin" type="submit" value="Let's Go!">*@
+    <div class="lets-go-title login-item" id="userNameLogin"></div>
+    <div class="logout-title login-item" id="userNameLogout" style="visibility: hidden"></div>
+    @*<input class="login-item" id="userNameLogout" type="submit" style="visibility: hidden" value="Logout!">*@
 </div>
 
 
@@ -90,7 +50,7 @@
             <img src="~/Content/Arena/Images/Skat Star Ship.png" />
         </div>*@
 </div>
-<div id="mouse-position"></div>
+@*<div id="mouse-position"></div>
 <div id="user-angle"></div>
 <div id="users"></div>
 <div id="keyState"></div>
@@ -98,7 +58,7 @@
 <div class="keystate-left"></div>
 <div class="keystate-up"></div>
 <div class="keystate-down"></div>
-<div class="keystate-mouse"></div>
+<div class="keystate-mouse"></div>*@
 
 <script src="~/Scripts/Arena/GameController.js"></script>
 
@@ -107,6 +67,108 @@
 
 
 
-    window.gameController.init();
+   window.gameController.init();
 
 </script>
+
+
+<style>
+
+    .explosion {
+        width: 0px;
+        height: 0px;
+    }
+
+    .explosion img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .star-ship {
+        width: 0px;
+        height: 0px;
+    }
+
+    .star-ship img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .bullet {
+        width: 0px;
+        height: 0px;
+    }
+
+    .bullet img {
+        width: 5px;
+        height: 20px;
+    }
+
+    .starships-arena {
+        width: 1100px;
+        height: 670px;
+        border: 5px solid #021325;
+        /*background-color: black;*/
+    }
+
+    .noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+    }
+
+    body {
+        background-image: url(../../Content/Arena/Images/Background.jpg);
+        padding-top: 10px;
+        padding-bottom: 0px;
+    }
+    .main-title {
+        background-image: url(../../Content/Arena/Images/MainTitle.png);
+        height: 140px;
+        width: 450px;
+        margin: 10px;
+    }
+
+    .sub-main-title {
+        background-image: url(../../Content/Arena/Images/SubMainTitle.png);
+        height: 52px;
+        width: 303px;
+        margin: 10px;
+        margin-left: 83px;
+    }
+
+    .title-container {
+        margin: auto;
+        width: 450px;
+    }
+
+    .enter-name-title {
+        background-image: url(../../Content/Arena/Images/EnterNameTitle.png);
+        width: 230px;
+        height: 26px;
+    }
+
+    .lets-go-title {
+        background-image: url(../../Content/Arena/Images/LetsGoTitle.png);
+        width: 116px;
+        height: 26px;
+    }
+
+    .login-container {
+        display: table;
+    }
+
+    .login-item {
+        display: table-cell;
+    }
+
+    .logout-title {
+        background-image: url(../../Content/Arena/Images/LogoutTitle.png);
+        width: 107px;
+        height: 28px;
+    }
+</style>

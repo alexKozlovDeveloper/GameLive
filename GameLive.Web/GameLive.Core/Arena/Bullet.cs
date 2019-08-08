@@ -23,12 +23,19 @@ namespace GameLive.Core.Arena
 
         public void NextTick()
         {
-            Position.X += (int)(Math.Sin(Position.Angle / 57.2) * 10);
-            Position.Y += (int)(Math.Cos(Position.Angle / 57.2) * 10);
+            double speed = 14;
+
+            Position.X += Math.Sin(Position.Angle / 57.2) * speed;
+            Position.Y += Math.Cos(Position.Angle / 57.2) * speed;
 
             TimeToLive--;
 
             if (TimeToLive <= 0)
+            {
+                ObjectState = MapObjectState.RemovalCandidate;
+            }
+
+            if (Position.X < 0 || Position.Y < 0 || Position.X > 1100 || Position.Y > 670)
             {
                 ObjectState = MapObjectState.RemovalCandidate;
             }

@@ -34,6 +34,8 @@ namespace GameLive.Core.Arena
         public delegate void ShotHandler(Bullet bullet);
         public event ShotHandler Shot;
 
+        private Random _rnd = new Random();
+
         public void NextTick()
         {
             if (Cooldown > 0)
@@ -47,42 +49,45 @@ namespace GameLive.Core.Arena
             {
                 UserState = UserState.Alive;
                 TimeToLive = 10_000_000;
-                Position.X = 100;
-                Position.Y = 100;
+                Position.X = _rnd.Next(300, 800);
+                Position.Y = _rnd.Next(100, 400);
                 HitPoints = 100;
             }
         }
 
         public void Move(KeyState keyState)
         {
+            double speed = 1.3;
+            double angleSpeed = 2.1;
+
             if (UserState == UserState.Dead)
             {
                 return;
             }
 
-            if ((keyState & KeyState.Up) == KeyState.Up)
+            if ((keyState & KeyState.Up) == KeyState.Up && Position.Y < 500)
             {
-                Position.Y += 1;
+                Position.Y += speed;
             }
 
-            if ((keyState & KeyState.Down) == KeyState.Down)
+            if ((keyState & KeyState.Down) == KeyState.Down && Position.Y > -170)
             {
-                Position.Y -= 1;
+                Position.Y -= speed;
             }
 
-            if ((keyState & KeyState.Left) == KeyState.Left)
+            if ((keyState & KeyState.Left) == KeyState.Left && Position.X > 0)
             {
-                Position.X -= 1;
+                Position.X -= speed;
             }
 
-            if ((keyState & KeyState.Right) == KeyState.Right)
+            if ((keyState & KeyState.Right) == KeyState.Right && Position.X < 1100)
             {
-                Position.X += 1;
+                Position.X += speed;
             }
 
             if ((keyState & KeyState.ClockwiseRotation) == KeyState.ClockwiseRotation)
             {
-                Position.Angle += 2;
+                Position.Angle += angleSpeed;
 
                 if (Position.Angle > 360)
                 {
@@ -92,7 +97,7 @@ namespace GameLive.Core.Arena
 
             if ((keyState & KeyState.CounterclockwiseRotation) == KeyState.CounterclockwiseRotation)
             {
-                Position.Angle -= 2;
+                Position.Angle -= angleSpeed;
 
                 if (Position.Angle < 0)
                 {

@@ -20,6 +20,11 @@ namespace GameLive.Web.Controllers
             return View();
         }
 
+        public ActionResult WelcomePage()
+        {
+            return View();
+        }
+
         [HttpPost]
         public string AddUser(string name)
         {

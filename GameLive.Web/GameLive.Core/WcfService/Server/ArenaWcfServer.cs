@@ -27,6 +27,8 @@ namespace GameLive.Core.WcfService.Server
         private Dictionary<string, UserInfo> _users;
         private List<Bullet> _bullets;
 
+        private Random _rnd = new Random();
+
         public ArenaWcfServer(string addressUri, ILogger logger) : base(logger)
         {
             _address = new Uri(addressUri);
@@ -104,7 +106,7 @@ namespace GameLive.Core.WcfService.Server
                             if (userInfo.Value.HitPoints <= 0)
                             {
                                 userInfo.Value.UserState = UserState.Dead;
-                                userInfo.Value.TimeToLive = 37;
+                                userInfo.Value.TimeToLive = 42;
                             }
                         }
                     }
@@ -135,7 +137,7 @@ namespace GameLive.Core.WcfService.Server
             {
                 Name = name,
                 Id = Guid.NewGuid().ToString(),
-                Position = new Position(0, 0, 0, 25),
+                Position = new Position(_rnd.Next(300,800), _rnd.Next(100, 400), 0, 25),
                 HitPoints = 100,
                 Cooldown = 0,
                 UserState = UserState.Alive,
