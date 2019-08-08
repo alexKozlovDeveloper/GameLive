@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameLive.Core.Arena;
+using GameLive.Core.Arena.Enums;
 using GameLive.Core.Configuration;
 using GameLive.Core.Logging;
 using GameLive.Core.WcfService;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GameLive.Core.Arena;
+using GameLive.Core.Arena.Enums;
 using GameLive.Core.Configuration;
 using GameLive.Core.WcfService.Client;
 using GameLive.Core.WcfService.Server;

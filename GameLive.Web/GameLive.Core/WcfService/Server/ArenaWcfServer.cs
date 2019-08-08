@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -7,6 +8,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GameLive.Core.Arena;
+using GameLive.Core.Arena.Enums;
+using GameLive.Core.Arena.ObjectInteraction;
 using GameLive.Core.Interfaces;
 using GameLive.Core.MapEntityes;
 using GameLive.Core.WcfService.Interfaces;
@@ -70,31 +73,44 @@ namespace GameLive.Core.WcfService.Server
             Logger.Info("NextTick ArenaWcfServer...");
             //Thread.Sleep(millisecondsTickDelay);
 
-            var bulletsToRemove = new List<Bullet>();
-
             foreach (var bullet in _bullets)
             {
-                bullet.Move();
-                bullet.TimeToLive--;
-
-                if (bullet.TimeToLive <= 0)
-                {
-                    bulletsToRemove.Add(bullet);
-                }
+                bullet.NextTick();
             }
 
-            foreach (var bullet in bulletsToRemove)
+            var objectToRemove = _bullets.Where(a => a.ObjectState == MapObjectState.RemovalCandidate).ToList();
+
+            foreach (var bullet in objectToRemove)
             {
                 _bullets.Remove(bullet);
             }
 
             foreach (var userInfo in _users)
             {
-                if (userInfo.Value.Cooldown > 0)
+                userInfo.Value.NextTick();
+            }
+
+            foreach (var bullet in _bullets)
+            {
+                foreach (var userInfo in _users)
                 {
-                    userInfo.Value.Cooldown--;
+                    if (userInfo.Value.Id != bullet.UserId)
+                    {
+                        if (userInfo.Value.Position.IsIntersect(bullet.Position) && userInfo.Value.UserState != UserState.Dead)
+                        {
+                            bullet.TimeToLive = 0;
+                            userInfo.Value.HitPoints -= bullet.Damage;
+
+                            if (userInfo.Value.HitPoints <= 0)
+                            {
+                                userInfo.Value.UserState = UserState.Dead;
+                                userInfo.Value.TimeToLive = 37;
+                            }
+                        }
+                    }
                 }
             }
+
         }
 
         public void Move(string userId, KeyState keyState)
@@ -105,65 +121,10 @@ namespace GameLive.Core.WcfService.Server
             {
                 return;
             }
-
+            
             var user = _users[userId];
 
-            if ((keyState & KeyState.Up) == KeyState.Up)
-            {
-                user.Position.Y += 1;
-            }
-
-            if ((keyState & KeyState.Down) == KeyState.Down)
-            {
-                user.Position.Y -= 1;
-            }
-
-            if ((keyState & KeyState.Left) == KeyState.Left)
-            {
-                user.Position.X -= 1;
-            }
-
-            if ((keyState & KeyState.Right) == KeyState.Right)
-            {
-                user.Position.X += 1;
-            }
-
-            if ((keyState & KeyState.ClockwiseRotation) == KeyState.ClockwiseRotation)
-            {
-                user.Position.Angle += 2;
-
-                if (user.Position.Angle > 360)
-                {
-                    user.Position.Angle -= 360;
-                }
-            }
-
-            if ((keyState & KeyState.CounterclockwiseRotation) == KeyState.CounterclockwiseRotation)
-            {
-                user.Position.Angle -= 2;
-
-                if (user.Position.Angle < 0)
-                {
-                    user.Position.Angle += 360;
-                }
-            }
-
-            if ((keyState & KeyState.IsAttack) == KeyState.IsAttack)
-            {
-                if (user.Cooldown == 0)
-                {
-                    var bullet = new Bullet
-                    {
-                        UserId = user.Id,
-                        TimeToLive = 100,
-                        Position = new Position(user.Position.X, user.Position.Y, user.Position.Angle)
-                    };
-
-                    _bullets.Add(bullet);
-
-                    user.Cooldown = 10;
-                }
-            }
+            user.Move(keyState);
         }
 
         public string AddUser(string name)
@@ -174,12 +135,23 @@ namespace GameLive.Core.WcfService.Server
             {
                 Name = name,
                 Id = Guid.NewGuid().ToString(),
-                Position = new Position(0, 0)
+                Position = new Position(0, 0, 0, 25),
+                HitPoints = 100,
+                Cooldown = 0,
+                UserState = UserState.Alive,
+                TimeToLive = 10_000_000
             };
+
+            user.Shot += User_Shot;
 
             _users.Add(user.Id, user);
 
             return user.Id;
+        }
+
+        private void User_Shot(Bullet bullet)
+        {
+            _bullets.Add(bullet);
         }
 
         public List<UserInfo> GetUsers()

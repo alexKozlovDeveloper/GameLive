@@ -5,6 +5,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using GameLive.Core.Arena;
+using GameLive.Core.Arena.Enums;
 
 namespace GameLive.Core.WcfService.Interfaces
 {

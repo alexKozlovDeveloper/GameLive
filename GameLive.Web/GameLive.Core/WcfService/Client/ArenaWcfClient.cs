@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameLive.Core.Arena;
+using GameLive.Core.Arena.Enums;
 using GameLive.Core.WcfService.Interfaces;
 
 namespace GameLive.Core.WcfService.Client

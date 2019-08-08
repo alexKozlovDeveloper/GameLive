@@ -23,6 +23,15 @@
 
         return divStr;
     },
+    getExplosionDiv: function (shipName, userId, x, y, angle) {
+        var style = "style = 'position: relative; bottom: " + (-500 + y) + "px; left: " + x + "px; transform: rotate(" + angle + "deg)'";
+
+        var divStr = "<div class='explosion'>";
+        divStr += "<img id='user-" + userId + "' src='/Content/Arena/Images/explosion.gif' " + style + " />";
+        divStr += "</div>";
+
+        return divStr;
+    },
     getBulletDiv: function (bulletName, userId, x, y, angle) {
         var style = "style = 'position: relative; bottom: " + (-500 + y) + "px; left: " + x + "px; transform: rotate(" + angle + "deg)'";
 
@@ -104,6 +113,14 @@
 
                     if (i === 4) {
                         starShip = window.gameController.getStarShipDiv("Skat Star Ship", data[i].Id, data[i].Position.X - 25, data[i].Position.Y + 25, data[i].Position.Angle);
+                    }
+
+                    if (data[i].UserState === 1) {
+                        starShip = window.gameController.getExplosionDiv("Skat Star Ship",
+                            data[i].Id,
+                            data[i].Position.X - 25,
+                            data[i].Position.Y + 25,
+                            data[i].Position.Angle);
                     }
 
                     $(".starships-arena").append(starShip);

@@ -50,9 +50,15 @@
   <ItemGroup>
     <Compile Include="Arena\BaseMapObject.cs" />
     <Compile Include="Arena\Bullet.cs" />
-    <Compile Include="Arena\KeyState.cs" />
+    <Compile Include="Arena\Enums\MapObjectState.cs" />
+    <Compile Include="Arena\Interfaces\IInteractable.cs" />
+    <Compile Include="Arena\Interfaces\IMapObject.cs" />
+    <Compile Include="Arena\Interfaces\IMovableObject.cs" />
+    <Compile Include="Arena\ObjectInteraction\IntersectHelper.cs" />
+    <Compile Include="Arena\Enums\KeyState.cs" />
     <Compile Include="Arena\Position.cs" />
     <Compile Include="Arena\UserInfo.cs" />
+    <Compile Include="Arena\Enums\UserState.cs" />
     <Compile Include="BaseLoggerObject.cs" />
     <Compile Include="Configuration\ConfigHelper.cs" />
     <Compile Include="Configuration\KeyWords.cs" />

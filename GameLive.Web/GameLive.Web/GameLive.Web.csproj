@@ -170,6 +170,9 @@
     <Content Include="Content\Arena\Images\Butterfly Star Ship.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Arena\Images\explosion.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Arena\Images\Flamingo Star Ship.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
