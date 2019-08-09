@@ -35,7 +35,7 @@ namespace GameLive.Core.Arena
                 ObjectState = MapObjectState.RemovalCandidate;
             }
 
-            if (Position.X < 0 || Position.Y < 0 || Position.X > 1100 || Position.Y > 670)
+            if (Position.X < 0 || Position.Y < -170 || Position.X > 1100 || Position.Y > 500)
             {
                 ObjectState = MapObjectState.RemovalCandidate;
             }

@@ -14,6 +14,14 @@
 
         localStorage.setItem("user", null);
     },
+    getStatisticsDiv: function (userName, killCount, deadCount) {
+
+        var divStr = "<div >";
+        divStr += "<div>" + userName + " Kills: '" + killCount + "' Deads: '" + deadCount + "' </div>";
+        divStr += "</div>";
+
+        return divStr;
+    },
     getStarShipDiv: function (shipName, userId, x, y, angle) {
         var style = "style = 'position: relative; bottom: " + (-500 + y) + "px; left: " + x + "px; transform: rotate(" + angle + "deg)'";
 
@@ -74,16 +82,27 @@
 
                 var userInfoDiv = "";
 
+                var usersStatistics = "";
+
                 for (var i = 0; i < data.length; i++) {
                     //userInfoDiv += "<div>" + data[i].Name + "[" + data[i].Position.X + "x" + data[i].Position.Y + "] [" + data[i].Id + "]</div>";
                     userInfoDiv += "<div>" + JSON.stringify(data[i]) + "</div>";
+
+                    usersStatistics += window.gameController.getStatisticsDiv(data[i].Name,
+                        data[i].KillCount,
+                        data[i].DeadCount);
                 }
 
                 var usersDiv = $("#users");
 
+                var statisticsDiv = $(".statistics");
+
                 usersDiv.empty();
                 usersDiv.append(userInfoDiv);
 
+
+                statisticsDiv.empty();
+                statisticsDiv.append(usersStatistics);
 
                 $(".starships-arena").empty();
 

@@ -31,6 +31,13 @@ namespace GameLive.Core.Arena
         [DataMember]
         public int Cooldown { get; set; }
 
+        [DataMember]
+        public int KillCount { get; set; }
+
+        [DataMember]
+        public int DeadCount { get; set; }
+
+
         public delegate void ShotHandler(Bullet bullet);
         public event ShotHandler Shot;
 
@@ -57,8 +64,8 @@ namespace GameLive.Core.Arena
 
         public void Move(KeyState keyState)
         {
-            double speed = 1.3;
-            double angleSpeed = 2.1;
+            double speed = 1.8;
+            double angleSpeed = 2.8;
 
             if (UserState == UserState.Dead)
             {
@@ -114,12 +121,12 @@ namespace GameLive.Core.Arena
                         UserId = Id,
                         TimeToLive = 100,
                         Position = new Position(Position.X, Position.Y, Position.Angle, 5),
-                        Damage = 10
+                        Damage = 100
                     };
 
                     Shot(bullet);
 
-                    Cooldown = 10;
+                    Cooldown = 20;
                 }
             }
         }

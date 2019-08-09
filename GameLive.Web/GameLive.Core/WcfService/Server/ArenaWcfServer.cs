@@ -107,6 +107,12 @@ namespace GameLive.Core.WcfService.Server
                             {
                                 userInfo.Value.UserState = UserState.Dead;
                                 userInfo.Value.TimeToLive = 42;
+                                userInfo.Value.DeadCount++;
+
+                                if (_users.Keys.Contains(bullet.UserId))
+                                {
+                                    _users[bullet.UserId].KillCount++;
+                                }
                             }
                         }
                     }
