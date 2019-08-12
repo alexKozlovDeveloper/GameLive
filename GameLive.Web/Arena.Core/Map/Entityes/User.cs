@@ -9,7 +9,7 @@ using GameLive.Core.Arena;
 namespace Arena.Core.Map.Entityes
 {
     [DataContract]
-    public class UserInfo : BaseMapObject, IMovableObject, IInteractable // , IMapObject 
+    public class User : BaseMapObject, IMovableObject, IInteractable // , IMapObject 
     {
         [DataMember]
         public string Id { get; set; }

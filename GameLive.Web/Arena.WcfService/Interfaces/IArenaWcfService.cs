@@ -15,7 +15,7 @@ namespace Arena.WcfService.Interfaces
         string AddUser(string name);
 
         [OperationContract]
-        List<UserInfo> GetUsers();
+        List<User> GetUsers();
 
         [OperationContract]
         List<Bullet> GetBullets();

@@ -60,6 +60,7 @@
     <Compile Include="MapEntityes\MapFactory.cs" />
     <Compile Include="MapEntityes\MapSaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GlobalRandom.cs" />
     <Compile Include="WcfService\Client\BaseWcfClient.cs" />
     <Compile Include="WcfService\Client\GameWcfClient.cs" />
     <Compile Include="WcfService\Server\GameWcfServer.cs" />

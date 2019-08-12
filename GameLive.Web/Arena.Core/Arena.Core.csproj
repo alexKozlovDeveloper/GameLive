@@ -51,7 +51,8 @@
     <Compile Include="Map\Entityes\BaseMapObject.cs" />
     <Compile Include="Map\Entityes\Bullet.cs" />
     <Compile Include="Map\Entityes\Position.cs" />
-    <Compile Include="Map\Entityes\UserInfo.cs" />
+    <Compile Include="Map\Entityes\User.cs" />
+    <Compile Include="Map\MapObjectStore.cs" />
     <Compile Include="ObjectInteraction\IntersectHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShipInfrastructure\Cooldown.cs" />

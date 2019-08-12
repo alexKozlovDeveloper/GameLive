@@ -51,7 +51,7 @@ namespace Arena.Core.Map.Entityes
                 return;
             }
 
-            if (intersectedObject is UserInfo user)
+            if (intersectedObject is User user)
             {
                 if (user.Id == UserId)
                 {

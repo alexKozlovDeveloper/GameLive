@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using Arena.Core.Enums;
 using Arena.Core.Interfaces;
+using Arena.Core.Map;
 using Arena.Core.Map.Entityes;
 using Arena.Core.ShipInfrastructure;
 using Arena.WcfService.Interfaces;
@@ -21,15 +22,7 @@ namespace Arena.WcfService.Server
 
         private ServiceHost _serviceHost;
 
-        private List<UserInfo> _users;
-        //private List<Bullet> _bullets;
-
-        private List<BaseMapObject> _mapObjects;
-
-        private List<IInteractable> _interactables;
-        //private List<IMovableObject> _movableObjects;
-
-        private Random _rnd = new Random();
+        private MapObjectStore _mapObjectStore;
 
         public ArenaWcfServer(string addressUri, ILogger logger) : base(logger)
         {
@@ -40,11 +33,7 @@ namespace Arena.WcfService.Server
         {
             Logger.Info("Starting ArenaWcfServer...");
 
-            _users = new List<UserInfo>();
-            //_bullets = new List<Bullet>();
-
-            _mapObjects = new List<BaseMapObject>();
-            _interactables = new List<IInteractable>();
+            _mapObjectStore = new MapObjectStore();
             //_movableObjects = new List<IMovableObject>();
 
             try
@@ -75,80 +64,19 @@ namespace Arena.WcfService.Server
             Logger.Info("Stoping ArenaWcfServer...");
             _serviceHost.Close();
         }
-
-        private void AddMapObject(BaseMapObject obj)
-        {
-            _mapObjects.Add(obj);
-
-            if (obj is IInteractable interactable)
-            {
-                _interactables.Add(interactable);
-            }
-
-            //if (obj is Bullet bullet)
-            //{
-            //    _bullets.Add(bullet);
-            //}
-
-            if (obj is UserInfo user)
-            {
-                _users.Add(user);
-            }
-
-            //if (obj is IMovableObject movableObject)
-            //{
-            //    _movableObjects.Add(movableObject);
-            //}
-        }
-
-        private void RemoveMapObject(BaseMapObject obj)
-        {
-            _mapObjects.Remove(obj);
-
-            if (obj is IInteractable interactable)
-            {
-                _interactables.Remove(interactable);
-            }
-        }
-
+        
         public void NextTick(int millisecondsTickDelay)
         {
             Logger.Info("NextTick ArenaWcfServer...");
-            //Thread.Sleep(millisecondsTickDelay);
 
-            foreach (var baseMapObject in _mapObjects)
-            {
-                baseMapObject.NextTick();
-            }
-
-            for (int i = 0; i < _interactables.Count; i++)
-            {
-                for (int j = i + 1; j < _interactables.Count; j++)
-                {
-                    if (i == j) { continue; }
-
-                    if (_interactables[i].IsIntersect(_interactables[j]))
-                    {
-                        _interactables[i].Intersect(_interactables[j]);
-                        _interactables[j].Intersect(_interactables[i]);
-                    }
-                }
-            }
-
-            var objectToRemove = _mapObjects.Where(a => a.ObjectState == MapObjectState.RemovalCandidate).ToList();
-
-            foreach (var mapObject in objectToRemove)
-            {
-                RemoveMapObject(mapObject);
-            }
-
+            _mapObjectStore.NextTick();
         }
 
         public void Move(string userId, KeyState keyState)
         {
             Logger.Info($"Processing 'Move' [{userId} {keyState}]");
 
-            var user = _users.FirstOrDefault(a => a.Id == userId);
+            var user = _mapObjectStore.Users.FirstOrDefault(a => a.Id == userId);
 
             user?.Move(keyState);
         }
@@ -157,11 +85,11 @@ namespace Arena.WcfService.Server
         {
             Logger.Info($"Processing 'AddUser' [{name}]");
 
-            var user = new UserInfo
+            var user = new User
             {
                 Name = name,
                 Id = Guid.NewGuid().ToString(),
-                Position = new Position(_rnd.Next(300,800), _rnd.Next(100, 400), 0, 25),
+                Position = new Position(Global.Random.Next(300,800), Global.Random.Next(100, 400), 0, 25),
                 StarShip = new StarShip()
                 {
                     HitPoints = 100,
@@ -174,15 +102,14 @@ namespace Arena.WcfService.Server
             user.Shot += User_Shot;
             user.Dead += User_Dead;
 
-            //_users.Add(user);
-            AddMapObject(user);
+            _mapObjectStore.AddMapObject(user);
 
             return user.Id;
         }
 
         private void User_Dead(string killerUserId)
         {
-            var user = _users.FirstOrDefault(a => a.Id == killerUserId);
+            var user = _mapObjectStore.Users.FirstOrDefault(a => a.Id == killerUserId);
 
             if (user != null)
             {
@@ -192,23 +119,21 @@ namespace Arena.WcfService.Server
 
         private void User_Shot(Bullet bullet)
         {
-            AddMapObject(bullet);
-            //_bullets.Add(bullet);
-            //_interactables.Add(bullet);
+            _mapObjectStore.AddMapObject(bullet);
         }
 
-        public List<UserInfo> GetUsers()
+        public List<User> GetUsers()
         {
             Logger.Info($"Processing 'GetUsers'");
 
-            return _users.ToList();
+            return _mapObjectStore.Users.ToList();
         }
 
         public List<Bullet> GetBullets()
         {
             Logger.Info($"Processing 'GetBullets'");
 
-            var bullets = _mapObjects.OfType<Bullet>().ToList();
+            var bullets = _mapObjectStore.MapObjects.OfType<Bullet>().ToList();
 
             return bullets;
         }

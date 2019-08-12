@@ -31,7 +31,7 @@ namespace Arena.WcfService.Client
             channel.Move(userId, keyState);
         }
 
-        public List<UserInfo> GetUsers()
+        public List<User> GetUsers()
         {
             IArenaWcfService channel = GetChannel(_address);
 
