@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
-using GameLive.Core.Arena;
-using GameLive.Core.Arena.Enums;
+using Arena.Core.Enums;
+using Arena.Core.Map.Entityes;
 
-namespace GameLive.Core.WcfService.Interfaces
+namespace Arena.WcfService.Interfaces
 {
     [ServiceContract]
     public interface IArenaWcfService

@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5723CB5A-B778-4D81-876A-E883DA19D175}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>GameLive.TestClientConsole</RootNamespace>
-    <AssemblyName>GameLive.TestClientConsole</AssemblyName>
+    <ProjectGuid>{59735791-42DF-4868-AA20-A564BDC7513F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Arena.WcfService</RootNamespace>
+    <AssemblyName>Arena.WcfService</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,23 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Client\ArenaWcfClient.cs" />
+    <Compile Include="Interfaces\IArenaWcfService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\ArenaWcfServer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arena.Core\Arena.Core.csproj">
-      <Project>{BB5AE596-1C5E-49AF-907F-8BFE96476ABD}</Project>
+      <Project>{bb5ae596-1c5e-49af-907f-8bfe96476abd}</Project>
       <Name>Arena.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Arena.WcfService\Arena.WcfService.csproj">
-      <Project>{59735791-42DF-4868-AA20-A564BDC7513F}</Project>
-      <Name>Arena.WcfService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GameLive.Core\GameLive.Core.csproj">
-      <Project>{900d5b0b-019c-4673-8d57-6b2ef9e8fa93}</Project>
+      <Project>{900D5B0B-019C-4673-8D57-6B2EF9E8FA93}</Project>
       <Name>GameLive.Core</Name>
     </ProjectReference>
   </ItemGroup>

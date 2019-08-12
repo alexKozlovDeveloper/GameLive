@@ -1,6 +1,7 @@
 ﻿using System;
+using GameLive.Core.Arena;
 
-namespace GameLive.Core.Arena.ObjectInteraction
+namespace Arena.Core.ObjectInteraction
 {
     public static class IntersectHelper
     {

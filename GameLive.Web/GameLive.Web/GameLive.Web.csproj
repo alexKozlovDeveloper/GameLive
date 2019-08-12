@@ -261,6 +261,14 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Arena.Core\Arena.Core.csproj">
+      <Project>{bb5ae596-1c5e-49af-907f-8bfe96476abd}</Project>
+      <Name>Arena.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Arena.WcfService\Arena.WcfService.csproj">
+      <Project>{59735791-42DF-4868-AA20-A564BDC7513F}</Project>
+      <Name>Arena.WcfService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GameLive.Core\GameLive.Core.csproj">
       <Project>{900d5b0b-019c-4673-8d57-6b2ef9e8fa93}</Project>
       <Name>GameLive.Core</Name>

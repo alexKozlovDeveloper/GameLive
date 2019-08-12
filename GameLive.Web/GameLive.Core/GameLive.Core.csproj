@@ -48,17 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arena\BaseMapObject.cs" />
-    <Compile Include="Arena\Bullet.cs" />
-    <Compile Include="Arena\Enums\MapObjectState.cs" />
-    <Compile Include="Arena\Interfaces\IInteractable.cs" />
-    <Compile Include="Arena\Interfaces\IMapObject.cs" />
-    <Compile Include="Arena\Interfaces\IMovableObject.cs" />
-    <Compile Include="Arena\ObjectInteraction\IntersectHelper.cs" />
-    <Compile Include="Arena\Enums\KeyState.cs" />
-    <Compile Include="Arena\Position.cs" />
-    <Compile Include="Arena\UserInfo.cs" />
-    <Compile Include="Arena\Enums\UserState.cs" />
     <Compile Include="BaseLoggerObject.cs" />
     <Compile Include="Configuration\ConfigHelper.cs" />
     <Compile Include="Configuration\KeyWords.cs" />
@@ -71,11 +60,8 @@
     <Compile Include="MapEntityes\MapFactory.cs" />
     <Compile Include="MapEntityes\MapSaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WcfService\Client\ArenaWcfClient.cs" />
     <Compile Include="WcfService\Client\BaseWcfClient.cs" />
     <Compile Include="WcfService\Client\GameWcfClient.cs" />
-    <Compile Include="WcfService\Interfaces\IArenaWcfService.cs" />
-    <Compile Include="WcfService\Server\ArenaWcfServer.cs" />
     <Compile Include="WcfService\Server\GameWcfServer.cs" />
     <Compile Include="WcfService\Interfaces\IGameWcfService.cs" />
     <Compile Include="WindowsService\IServiceComponent.cs" />

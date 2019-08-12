@@ -1,6 +1,6 @@
-﻿using GameLive.Core.Arena.Enums;
+﻿using Arena.Core.Enums;
 
-namespace GameLive.Core.Arena.Interfaces
+namespace Arena.Core.Interfaces
 {
     public interface IMovableObject
     {

@@ -5,8 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Arena.Core.Enums;
+using Arena.WcfService.Client;
 using GameLive.Core.Arena;
-using GameLive.Core.Arena.Enums;
 using GameLive.Core.Configuration;
 using GameLive.Core.Logging;
 using GameLive.Core.WcfService;
@@ -18,6 +19,22 @@ namespace GameLive.TestClientConsole
     {
         static void Main(string[] args)
         {
+
+            List<int> items = new List<int>() { 1, 2, 3, 4, 5 };
+
+            List<string> result = new List<string>();
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                for (int j = i + 1; j < items.Count; j++)
+                {
+                    if (i != j)
+                    {
+                        result.Add($"{i} - {j}");
+                    }
+                }
+            }
+
             //var logFolder = ConfigHelper.LogFolder;
             //var wcfServiceUri = ConfigHelper.WcfServiceUri;
 
@@ -35,19 +52,19 @@ namespace GameLive.TestClientConsole
 
             //if ((f & KeyState.Down) == KeyState.Down)
             //{
-                
+
             //}
 
             //if ((f & KeyState.Left) == KeyState.Left)
             //{
-                
+
             //}
 
             //if ((f & KeyState.Right) == KeyState.Right)
             //{
-                
+
             //}
-            
+
 
             var client = new ArenaWcfClient(ConfigHelper.ArenaWcfServiceUri);
 

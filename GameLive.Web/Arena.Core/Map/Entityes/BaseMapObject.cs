@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using GameLive.Core.Arena.Enums;
+﻿using System.Runtime.Serialization;
+using Arena.Core.Enums;
+using GameLive.Core.Arena;
 
-namespace GameLive.Core.Arena
+namespace Arena.Core.Map.Entityes
 {
     [DataContract]
     public class BaseMapObject
@@ -26,6 +22,11 @@ namespace GameLive.Core.Arena
         {
             ObjectState = MapObjectState.Alive;
             Position = position;
+        }
+
+        public virtual void NextTick()
+        {
+            
         }
     }
 }

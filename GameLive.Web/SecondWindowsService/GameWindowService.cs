@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceProcess;
 using System.Threading;
+using Arena.WcfService.Server;
 using GameLive.Core.Configuration;
 using GameLive.Core.Interfaces;
 using GameLive.Core.Logging;

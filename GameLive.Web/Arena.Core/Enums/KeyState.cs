@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameLive.Core.Arena.Enums
+namespace Arena.Core.Enums
 {
     [Flags]
     public enum KeyState : byte

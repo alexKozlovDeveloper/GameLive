@@ -311,7 +311,7 @@
             window.gameController.keyState.IsAttack = true;
             $(".keystate-mouse").text("down");
         }).mouseup(function () {
-            window.gameController.keyState.IsAttack = false;
+            window.gameController.keyState.IsAttack = true;
             $(".keystate-mouse").text("up");
         });
 

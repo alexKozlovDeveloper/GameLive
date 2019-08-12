@@ -1,4 +1,4 @@
-﻿namespace GameLive.Core.Arena.Enums
+﻿namespace Arena.Core.Enums
 {
     public enum UserState
     {

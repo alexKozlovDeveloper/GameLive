@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameLive.Core.Arena;
-using GameLive.Core.Arena.Enums;
+using Arena.Core.Enums;
+using Arena.Core.Map.Entityes;
+using Arena.WcfService.Interfaces;
+using GameLive.Core.WcfService.Client;
 using GameLive.Core.WcfService.Interfaces;
 
-namespace GameLive.Core.WcfService.Client
+namespace Arena.WcfService.Client
 {
     public class ArenaWcfClient : BaseWcfClient<IArenaWcfService>
     {
