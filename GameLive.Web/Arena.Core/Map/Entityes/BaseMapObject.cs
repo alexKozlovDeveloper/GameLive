@@ -5,7 +5,7 @@ using GameLive.Core.Arena;
 namespace Arena.Core.Map.Entityes
 {
     [DataContract]
-    public class BaseMapObject
+    public abstract class BaseMapObject
     {
         [DataMember]
         public Position Position { get; set; }
@@ -13,12 +13,21 @@ namespace Arena.Core.Map.Entityes
         [DataMember]
         public MapObjectState ObjectState { get; set; }
 
-        public BaseMapObject()
+        [DataMember]
+        public string TexturePath { get; set; }
+
+        [DataMember]
+        public int Width { get; set; }
+
+        [DataMember]
+        public int Height { get; set; }
+
+        protected BaseMapObject()
         {
             ObjectState = MapObjectState.Alive;
         }
 
-        public BaseMapObject(Position position)
+        protected BaseMapObject(Position position)
         {
             ObjectState = MapObjectState.Alive;
             Position = position;

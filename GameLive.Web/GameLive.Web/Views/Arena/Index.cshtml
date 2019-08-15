@@ -61,18 +61,19 @@
 <div class="keystate-up"></div>
 <div class="keystate-down"></div>
 <div class="keystate-mouse"></div>*@
-
+<script src="~/Scripts/Arena/KeyStateController.js"></script>
 <script src="~/Scripts/Arena/GameController.js"></script>
 
 <script>
 
 
-
-
+    window.KeyStateController.setupKeyListener();
    window.gameController.init();
 
 </script>
 
+
+<div class="debug-div"></div>
 
 <style>
 

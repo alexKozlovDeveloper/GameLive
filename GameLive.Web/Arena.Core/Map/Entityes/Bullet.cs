@@ -57,6 +57,11 @@ namespace Arena.Core.Map.Entityes
                 {
                     return;
                 }
+
+                if (user.UserState == UserState.Dead)
+                {
+                    return;
+                }
             }
 
             ObjectState = MapObjectState.RemovalCandidate;

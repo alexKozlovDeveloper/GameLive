@@ -8,6 +8,7 @@
             angle: "0"
         }
     },
+    users: null,
     clearUser: function () {
         window.gameController.user.id = "";
         window.gameController.user.name = "";
@@ -31,7 +32,7 @@
 
         return divStr;
     },
-    getExplosionDiv: function (shipName, userId, x, y, angle) {
+    getExplosionDiv: function (userId, x, y, angle) {
         var style = "style = 'position: relative; bottom: " + (-500 + y) + "px; left: " + x + "px; transform: rotate(" + angle + "deg)'";
 
         var divStr = "<div class='explosion'>";
@@ -79,6 +80,8 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data, status) {
+
+                window.gameController.users = data;
 
                 var userInfoDiv = "";
 
@@ -135,7 +138,7 @@
                     }
 
                     if (data[i].UserState === 1) {
-                        starShip = window.gameController.getExplosionDiv("Skat Star Ship",
+                        starShip = window.gameController.getExplosionDiv(
                             data[i].Id,
                             data[i].Position.X - 25,
                             data[i].Position.Y + 25,
@@ -175,28 +178,31 @@
 
         var keyStateArray = [];
 
-        if (window.gameController.keyState.Right === true) {
+        if (window.KeyStateController.keyState.Right === true) {
             keyStateArray.push("Right");
         }
 
-        if (window.gameController.keyState.Left === true) {
+        if (window.KeyStateController.keyState.Left === true) {
             keyStateArray.push("Left");
         }
 
-        if (window.gameController.keyState.Up === true) {
+        if (window.KeyStateController.keyState.Up === true) {
             keyStateArray.push("Up");
         }
 
-        if (window.gameController.keyState.Down === true) {
+        if (window.KeyStateController.keyState.Down === true) {
             keyStateArray.push("Down");
         }
 
-        if (window.gameController.keyState.IsAttack === true) {
+        if (window.KeyStateController.keyState.IsAttack === true) {
             keyStateArray.push("IsAttack");
         }
 
         //debugger;
-        var change = window.gameController.keyState.MouseAngle - window.gameController.user.position.angle;
+        var mouseAngle = window.KeyStateController.GetAngle(window.gameController.user.position.x,
+            window.gameController.user.position.y);
+        debugger;
+        var change = mouseAngle - window.gameController.user.position.angle;
 
         if (change < 0) {
             change *= -1;
@@ -205,7 +211,7 @@
         if (change < 4) {
 
         } else {
-            if (window.gameController.keyState.MouseAngle > window.gameController.user.position.angle) {
+            if (mouseAngle > window.gameController.user.position.angle) {
                 if (change > 180) {
                     keyStateArray.push("CounterclockwiseRotation");
                 } else {
@@ -219,15 +225,6 @@
                 }
             }
         }
-
-
-
-        //if (change > 180) {
-        //    keyStateArray.push("ClockwiseRotation");
-        //} else {
-        //    keyStateArray.push("CounterclockwiseRotation");
-        //}
-        //keyStateArray.push("ClockwiseRotation");
 
         var keyState = keyStateArray.join();
 
@@ -253,113 +250,13 @@
             }
         });
     },
-    keyState: {
-        Down: false,
-        Up: false,
-        Left: false,
-        Right: false,
-        IsAttack: false,
-        MouseX: "0",
-        MouseY: "0",
-        MouseAngle: "0"
-    },
-    setupKeyListener: function () {
-
-        $(document).keydown(function (event) {
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-
-            if (keycode === 68) {
-                window.gameController.keyState.Right = true;
-            }
-            if (keycode === 87) {
-                window.gameController.keyState.Up = true;
-            }
-            if (keycode === 83) {
-                window.gameController.keyState.Down = true;
-            }
-            if (keycode === 65) {
-                window.gameController.keyState.Left = true;
-            }
-        });
-
-        $(document).keyup(function (event) {
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-
-            if (keycode === 68) {
-                window.gameController.keyState.Right = false;
-            }
-            if (keycode === 87) {
-                window.gameController.keyState.Up = false;
-            }
-            if (keycode === 83) {
-                window.gameController.keyState.Down = false;
-            }
-            if (keycode === 65) {
-                window.gameController.keyState.Left = false;
-            }
-        });
-
-        window.setInterval(function () {
-            $(".keystate-right").text('right ' + window.gameController.keyState.Right);
-            $(".keystate-left").text('left ' + window.gameController.keyState.Left);
-            $(".keystate-up").text('up ' + window.gameController.keyState.Up);
-            //$(".keystate-down").text('down ' + JSON.stringify(window.gameController.keyState)); 
-            $(".keystate-down").text('down ' + window.gameController.keyState.Down); 
-        }, 20);
-
-        $(document).mousedown(function () {
-            window.gameController.keyState.IsAttack = true;
-            $(".keystate-mouse").text("down");
-        }).mouseup(function () {
-            window.gameController.keyState.IsAttack = true;
-            $(".keystate-mouse").text("up");
-        });
-
-        
-    },
+    
     init: function () {
-        window.setInterval(function () {
-
-            var x1 = window.gameController.user.position.x + 25;
-            var y1 = window.gameController.user.position.y - 25;
-
-            var x2 = window.gameController.keyState.MouseX;
-            var y2 = window.gameController.keyState.MouseY;
-
-            var part1 = (y2 - y1);
-            var part2 = (x2 - x1);
-
-            var cof = part1 / part2;
-            var angle = Math.atan(cof) * 57.2958;
-
-            if (part2 < 0) {
-                angle += 180;
-            }
-
-            if (part1 < 0 && part2 > 0) {
-                angle += 360;
-            }
-
-            angle -= 90;
-            angle = 360 - angle;
-
-            while (angle > 360) {
-                angle -= 360;
-            }
-
-            while (angle < 0) {
-                angle += 360;
-            }
-
-            window.gameController.keyState.MouseAngle = angle;
-
-            $("#user-angle").text("(" + angle + ") [" + x1 + ":" + y1 + "] [" + x2 + ":" + y2 + "]");
-        }, 10);
 
         window.setInterval(function () {
             window.gameController.getUsers();
         }, 50);
-
+        
         window.setInterval(function () {
             window.gameController.getBullets();
         }, 50);
@@ -367,9 +264,7 @@
         window.setInterval(function () {
             window.gameController.move(window.gameController.user.id);
         }, 10);
-
-        window.gameController.setupKeyListener();
-
+        
         $("#userNameLogin").click(function () {
             var input = $("#userNameInput")[0];
 
@@ -398,16 +293,13 @@
             window.gameController.hideLogin();
         }
 
-        $(".starships-arena").mousemove(function (event) {
-            var offset = $(this).offset();
-            var x = event.pageX - offset.left;
-            var y = event.pageY - offset.top;
+        window.setInterval(function () {
 
-            window.gameController.keyState.MouseX = x;
-            window.gameController.keyState.MouseY = 500 - y;
+            var keyStateInfo = JSON.stringify(window.KeyStateController.keyState);
+            var usersInfo = JSON.stringify(window.gameController.users);
 
-            $("#mouse-position").html("(X: " + x + ", Y: " + (500 - y) + ")");
-        });
+            $(".debug-div").text(keyStateInfo + usersInfo);
+        }, 50);
     },
     hideLogin: function() {
         $("#userNameDiscription").css("visibility", "hidden");
