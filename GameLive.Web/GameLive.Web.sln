@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestingProjects", "TestingP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLive.WindowsService", "SecondWindowsService\GameLive.WindowsService.csproj", "{18A1D477-1F41-4F47-8D1F-09C06AB229A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arena.Core", "Arena.Core\Arena.Core.csproj", "{BB5AE596-1C5E-49AF-907F-8BFE96476ABD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arena.WcfService", "Arena.WcfService\Arena.WcfService.csproj", "{59735791-42DF-4868-AA20-A564BDC7513F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,14 @@ Global
 		{18A1D477-1F41-4F47-8D1F-09C06AB229A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18A1D477-1F41-4F47-8D1F-09C06AB229A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18A1D477-1F41-4F47-8D1F-09C06AB229A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB5AE596-1C5E-49AF-907F-8BFE96476ABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB5AE596-1C5E-49AF-907F-8BFE96476ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB5AE596-1C5E-49AF-907F-8BFE96476ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB5AE596-1C5E-49AF-907F-8BFE96476ABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59735791-42DF-4868-AA20-A564BDC7513F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59735791-42DF-4868-AA20-A564BDC7513F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59735791-42DF-4868-AA20-A564BDC7513F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59735791-42DF-4868-AA20-A564BDC7513F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

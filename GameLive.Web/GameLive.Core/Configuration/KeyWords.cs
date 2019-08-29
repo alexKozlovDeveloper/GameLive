@@ -12,6 +12,7 @@ namespace GameLive.Core.Configuration
         {
             public const string LogFolder = "LogFolder";
             public const string WcfServiceUri = "WcfServiceUri";
+            public const string ArenaWcfServiceUri = "ArenaWcfServiceUri";
             public const string DefaultMapWidth = "DefaultMapWidth";
             public const string DefaultMapHeight = "DefaultMapHeight";
             public const string GameWindowServiceTickDelay = "GameWindowServiceTickDelay";

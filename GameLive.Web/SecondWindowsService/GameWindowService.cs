@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceProcess;
 using System.Threading;
+using Arena.WcfService.Server;
 using GameLive.Core.Configuration;
 using GameLive.Core.Interfaces;
 using GameLive.Core.Logging;
@@ -29,7 +30,8 @@ namespace GameLive.WindowsService
 
             _serviceComponents = new List<IServiceComponent>
             {
-                new GameWcfServer(ConfigHelper.WcfServiceUri, ConfigHelper.DefaultMapWidth, ConfigHelper.DefaultMapHeight, _log)
+                new GameWcfServer(ConfigHelper.WcfServiceUri, ConfigHelper.DefaultMapWidth, ConfigHelper.DefaultMapHeight, _log),
+                new ArenaWcfServer(ConfigHelper.ArenaWcfServiceUri, _log)
             };
         }
 

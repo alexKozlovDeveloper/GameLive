@@ -3,6 +3,8 @@
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <link href="~/Content/MapStyles.css" rel="stylesheet" />
+<div id="arenaButton">Go to ARENA</div>
+
 <div>
     <input id="xSize" type="number" value="50">
     <input id="ySize" type="number" value="50">
@@ -23,6 +25,11 @@
     window.setInterval(function() {
         UpdateMap();
     }, 200);
+
+    $("#arenaButton").click(function () {
+        debugger;
+        window.location.href = "@Url.Action("Index", "Arena")";
+    });
 
     //var d = "@Url.Action("GetCurrentMapState", "Game")";
 

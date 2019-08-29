@@ -11,6 +11,7 @@ namespace GameLive.Core.Configuration
     {
         public static string LogFolder => GetStringValue(KeyWords.AppSettings.LogFolder);
         public static string WcfServiceUri => GetStringValue(KeyWords.AppSettings.WcfServiceUri);
+        public static string ArenaWcfServiceUri => GetStringValue(KeyWords.AppSettings.ArenaWcfServiceUri);
 
         public static int DefaultMapWidth => GetIntValue(KeyWords.AppSettings.DefaultMapWidth);
         public static int DefaultMapHeight => GetIntValue(KeyWords.AppSettings.DefaultMapHeight);

@@ -50,6 +50,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Arena.Core\Arena.Core.csproj">
+      <Project>{BB5AE596-1C5E-49AF-907F-8BFE96476ABD}</Project>
+      <Name>Arena.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Arena.WcfService\Arena.WcfService.csproj">
+      <Project>{59735791-42DF-4868-AA20-A564BDC7513F}</Project>
+      <Name>Arena.WcfService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GameLive.Core\GameLive.Core.csproj">
       <Project>{900d5b0b-019c-4673-8d57-6b2ef9e8fa93}</Project>
       <Name>GameLive.Core</Name>
