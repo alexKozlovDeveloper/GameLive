@@ -1,5 +1,101 @@
-﻿
+﻿<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+<link href="~/Content/BlocksApi/BlocksApiObjects.css" rel="stylesheet" />
+<script src="~/Scripts/BlocksApi/BlocksApiController.js"></script>
 
 <h2>Test BlocksAPi</h2>
 
-<div id="mainTestDiv"></div>
+<div id="mainTestDiv">
+    @*<div class="first-ship">
+        <div class="second-ship"></div>
+    </div>*@
+
+</div>
+
+@*<div id="outerDiv">
+    <div class="ignoreWidth" style="width: 20px;">20px</div>
+    <div style="width: 4px;">4px</div>
+    <div style="width: 8px;">8px</div>
+</div>*@
+
+<style>
+    #outerDiv {
+        position:relative;
+    }
+    .ignoreWidth {
+        position:absolute;
+        top: 0;
+        left: 0;
+        background-image: url(../../Content/Arena/Images/Flamingo-Star-Ship.png);
+    }
+
+    
+
+    .first-ship {
+        top: 25px;
+        left: 25px;
+        width: 100px;
+        height: 100px;
+        background-image: url(../../Content/Arena/Images/Flamingo-Star-Ship.png);
+    }
+
+    .second-ship {
+        position: relative;
+        top: 25px;
+        left: 25px;
+        transform-origin: center center;
+        width: 50px;
+        height: 50px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: white;
+        background-image: url(../../Content/Arena/Images/Piranha-Star-Ship.png);
+    }
+</style>
+
+<script>
+
+    var block1 = {
+        id: "blockId_1",
+        x: 100,
+        y: 100,
+        width: 100,
+        height: 100,
+        angle: 15,
+        image: "../../Content/Arena/Images/Flamingo-Star-Ship.png"
+    };
+
+    var block2 = {
+        id: "blockId_2",
+        x: 100,
+        y: 10,
+        width: 150,
+        height: 150,
+        angle: 45,
+        image: "../../Content/Arena/Images/Arasari-Star-Ship.png"
+    };
+
+    var block3 = {
+        id: "blockId_3",
+        x: 10,
+        y: 10,
+        width: 20,
+        height: 20,
+        angle: 140,
+        image: "../../Content/Arena/Images/Butterfly-Star-Ship.png"
+    };
+
+
+    window.BlocksAPiController.init("#mainTestDiv", 1000, 1000);
+    window.BlocksAPiController.addNewBlock(block1);
+    window.BlocksAPiController.addNewBlock(block2);
+    window.BlocksAPiController.addNewBlock(block3);
+
+</script>
+
+@*width: 50px;
+height: 50px;
+background-image: url(../../Content/Arena/Images/Flamingo-Star-Ship.png);
+background-size: contain;
+background-repeat: no-repeat;
+background-color: white*@

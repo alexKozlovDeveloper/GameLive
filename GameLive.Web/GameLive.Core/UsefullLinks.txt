@@ -2,3 +2,5 @@
 https://alekseygulynin.ru/wcf-delaem-formu-sluzhboj/
 https://metanit.com/sharp/aspnet5/20.1.php
 
+css:
+https://css-tricks.com/almanac/properties/t/transform-origin/

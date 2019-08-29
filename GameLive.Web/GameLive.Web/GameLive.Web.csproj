@@ -158,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Arena\Arena.css" />
+    <Content Include="Content\Arena\Images\Arasari-Star-Ship.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Arena\Images\Arasari Star Ship.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -170,6 +173,9 @@
     <Content Include="Content\Arena\Images\Bullet2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Arena\Images\Butterfly-Star-Ship.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Arena\Images\Butterfly Star Ship.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -177,6 +183,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Arena\Images\explosion.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Arena\Images\Flamingo-Star-Ship.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Arena\Images\Flamingo Star Ship.png">
@@ -189,7 +198,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Arena\Images\MainTitle.png" />
+    <Content Include="Content\Arena\Images\Piranha-Star-Ship.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Arena\Images\Piranha Star Ship.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Arena\Images\Skat-Star-Ship.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Arena\Images\Skat Star Ship.png">
@@ -198,6 +213,7 @@
     <Content Include="Content\Arena\Images\SubMainTitle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\BlocksApi\BlocksApiObjects.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

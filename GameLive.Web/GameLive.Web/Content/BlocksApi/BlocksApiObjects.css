@@ -1,0 +1,10 @@
+﻿.blocks-block {
+    position: absolute;
+    transform-origin: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.blocks-canvas {
+    position: relative;
+}
