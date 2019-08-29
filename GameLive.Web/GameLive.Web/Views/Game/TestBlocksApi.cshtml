@@ -7,31 +7,32 @@
 
 <div id="mainTestDiv">
     @*<div class="first-ship">
-        <div class="second-ship"></div>
-    </div>*@
+            <div class="second-ship"></div>
+        </div>*@
 
 </div>
 
 @*<div id="outerDiv">
-    <div class="ignoreWidth" style="width: 20px;">20px</div>
-    <div style="width: 4px;">4px</div>
-    <div style="width: 8px;">8px</div>
-</div>*@
+        <div class="ignoreWidth" style="width: 20px;">20px</div>
+        <div style="width: 4px;">4px</div>
+        <div style="width: 8px;">8px</div>
+    </div>*@
 
 <style>
-    #outerDiv {
-        position:relative;
+    /*#outerDiv {
+        position: relative;
     }
+
     .ignoreWidth {
-        position:absolute;
+        position: absolute;
         top: 0;
         left: 0;
         background-image: url(../../Content/Arena/Images/Flamingo-Star-Ship.png);
-    }
+    }*/
 
-    
 
-    .first-ship {
+
+    /*.first-ship {
         top: 25px;
         left: 25px;
         width: 100px;
@@ -50,7 +51,7 @@
         background-repeat: no-repeat;
         background-color: white;
         background-image: url(../../Content/Arena/Images/Piranha-Star-Ship.png);
-    }
+    }*/
 </style>
 
 <script>
@@ -72,7 +73,25 @@
         width: 150,
         height: 150,
         angle: 45,
-        image: "../../Content/Arena/Images/Arasari-Star-Ship.png"
+        image: "../../Content/Arena/Images/Arasari-Star-Ship.png",
+        children: [{
+            id: "blockId_4",
+            x: 10,
+            y: 10,
+            width: 20,
+            height: 20,
+            angle: 140,
+            image: "../../Content/Arena/Images/Butterfly-Star-Ship.png"
+        },
+        {
+            id: "blockId_5",
+            x: 20,
+            y: 20,
+            width: 20,
+            height: 20,
+            angle: 70,
+            image: "../../Content/Arena/Images/Butterfly-Star-Ship.png"
+        }]
     };
 
     var block3 = {
@@ -94,8 +113,8 @@
 </script>
 
 @*width: 50px;
-height: 50px;
-background-image: url(../../Content/Arena/Images/Flamingo-Star-Ship.png);
-background-size: contain;
-background-repeat: no-repeat;
-background-color: white*@
+    height: 50px;
+    background-image: url(../../Content/Arena/Images/Flamingo-Star-Ship.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: white*@
