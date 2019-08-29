@@ -60,17 +60,11 @@
             window.KeyStateController.keyState.MouseX = x;
             window.KeyStateController.keyState.MouseY = 500 - y;
         });
-
-        //window.setInterval(function (x, y) {
-        
     },
     GetAngle: function (x, y) {
 
-        //var x1 = window.gameController.user.position.x + 25;
-        //var y1 = window.gameController.user.position.y - 25;
-
-        var x1 = x + 25;
-        var y1 = y - 25;
+        var x1 = x;
+        var y1 = y;
 
         var x2 = window.KeyStateController.keyState.MouseX;
         var y2 = window.KeyStateController.keyState.MouseY;
@@ -99,8 +93,6 @@
         while (angle < 0) {
             angle += 360;
         }
-
-        window.KeyStateController.keyState.MouseAngle = angle;
 
         return angle;
     }

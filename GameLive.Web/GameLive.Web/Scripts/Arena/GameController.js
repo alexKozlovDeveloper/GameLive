@@ -199,8 +199,8 @@
         }
 
         //debugger;
-        var mouseAngle = window.KeyStateController.GetAngle(window.gameController.user.position.x,
-            window.gameController.user.position.y);
+        var mouseAngle = window.KeyStateController.GetAngle(window.gameController.user.position.x + 25,
+            window.gameController.user.position.y - 25);
         debugger;
         var change = mouseAngle - window.gameController.user.position.angle;
 

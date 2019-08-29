@@ -209,6 +209,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\Arena\GameController.js" />
     <Content Include="Scripts\Arena\KeyStateController.js" />
+    <Content Include="Scripts\BlocksApi\BlocksApiController.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -243,6 +244,7 @@
     <Content Include="Views\Game\Index.cshtml" />
     <Content Include="Views\Arena\Index.cshtml" />
     <Content Include="Views\Arena\WelcomePage.cshtml" />
+    <Content Include="Views\Game\TestBlocksApi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

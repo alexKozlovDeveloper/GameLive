@@ -40,5 +40,10 @@ namespace GameLive.Web.Controllers
 
             return client.GetCurrentMap();
         }
+
+        public ActionResult TestBlocksApi()
+        {
+            return View();
+        }
     }
 }
