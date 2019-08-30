@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using Arena.Core.Enums;
+using Arena.Core.Graphics;
 using Arena.Core.Interfaces;
 using Arena.Core.Map;
 using Arena.Core.Map.Entityes;
+using Arena.Core.ServiceEntityes;
 using Arena.Core.ShipInfrastructure;
 using Arena.WcfService.Interfaces;
 using GameLive.Core;
@@ -87,8 +89,9 @@ namespace Arena.WcfService.Server
 
             var user = new User
             {
+                Width = 60,
+                Height = 60,
                 Name = name,
-                Id = Guid.NewGuid().ToString(),
                 Position = new Position(Global.Random.Next(300,800), Global.Random.Next(100, 400), 0, 25),
                 StarShip = new StarShip()
                 {
@@ -96,7 +99,8 @@ namespace Arena.WcfService.Server
                     Cooldown = new Cooldown()
                 },
                 UserState = UserState.Alive,
-                TimeToLive = 10_000_000
+                TimeToLive = 10_000_000,
+                TexturePath = ImageUrlHelper.StarShips.Arasari
             };
 
             user.Shot += User_Shot;
@@ -136,6 +140,18 @@ namespace Arena.WcfService.Server
             var bullets = _mapObjectStore.MapObjects.OfType<Bullet>().ToList();
 
             return bullets;
+        }
+
+        public List<Block> GetBlocks()
+        {
+            var blocks = new List<Block>();
+
+            foreach (var baseMapObject in _mapObjectStore.MapObjects)
+            {
+                blocks.Add(baseMapObject.ToBlock());
+            }
+
+            return blocks;
         }
     }
 }

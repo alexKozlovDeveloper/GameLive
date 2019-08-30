@@ -11,7 +11,7 @@
         </div>*@
 
 </div>
-
+<div id="error"></div>
 @*<div id="outerDiv">
         <div class="ignoreWidth" style="width: 20px;">20px</div>
         <div style="width: 4px;">4px</div>
@@ -106,9 +106,30 @@
 
 
     window.BlocksAPiController.init("#mainTestDiv", 1000, 1000);
-    window.BlocksAPiController.addNewBlock(block1);
-    window.BlocksAPiController.addNewBlock(block2);
-    window.BlocksAPiController.addNewBlock(block3);
+    //window.BlocksAPiController.addNewBlock(block1);
+    //window.BlocksAPiController.addNewBlock(block2);
+    //window.BlocksAPiController.addNewBlock(block3);
+
+    $.ajax({
+        type: "POST",
+        url: '/Arena/GetBlocks',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, status) {
+
+            debugger;
+
+            for (var i = 0; i < data.length; i++) {
+                window.BlocksAPiController.addNewBlock(data[i]);
+            }
+            
+        },
+        error: function (e) {
+            debugger;
+            $("#error").append(e.responseText);
+        }
+    });
+
 
 </script>
 

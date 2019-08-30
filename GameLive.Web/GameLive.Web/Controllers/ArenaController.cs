@@ -63,5 +63,18 @@ namespace GameLive.Web.Controllers
 
             return JsonConvert.SerializeObject(bullets);
         }
+
+        // new 
+
+        [HttpPost]
+        public string GetBlocks()
+        {
+            var client = new ArenaWcfClient(ConfigHelper.ArenaWcfServiceUri);
+
+            var blocks = client.GetBlocks();
+
+            return JsonConvert.SerializeObject(blocks);
+        }
+
     }
 }

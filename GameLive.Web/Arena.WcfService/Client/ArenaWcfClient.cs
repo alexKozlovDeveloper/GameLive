@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Arena.Core.Enums;
 using Arena.Core.Map.Entityes;
+using Arena.Core.ServiceEntityes;
 using Arena.WcfService.Interfaces;
 using GameLive.Core.WcfService.Client;
 using GameLive.Core.WcfService.Interfaces;
@@ -43,6 +44,13 @@ namespace Arena.WcfService.Client
             IArenaWcfService channel = GetChannel(_address);
 
             return channel.GetBullets();
+        }
+
+        public List<Block> GetBlocks()
+        {
+            IArenaWcfService channel = GetChannel(_address);
+
+            return channel.GetBlocks();
         }
     }
 }

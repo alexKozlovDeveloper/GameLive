@@ -6,12 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Arena.Core.Enums;
+using Arena.Core.ServiceEntityes;
 using Arena.WcfService.Client;
 using GameLive.Core.Arena;
 using GameLive.Core.Configuration;
 using GameLive.Core.Logging;
 using GameLive.Core.WcfService;
 using GameLive.Core.WcfService.Client;
+using Newtonsoft.Json;
 
 namespace GameLive.TestClientConsole
 {
@@ -19,6 +21,18 @@ namespace GameLive.TestClientConsole
     {
         static void Main(string[] args)
         {
+            var block = new Block
+            {
+                X = 123,
+                Id = "sad",
+                Y = 21321,
+                Angle = 1231,
+                Width = 12321,
+                Height = 123,
+                Image = "df"
+            };
+
+            var st = JsonConvert.SerializeObject(block);
 
             List<int> items = new List<int>() { 1, 2, 3, 4, 5 };
 

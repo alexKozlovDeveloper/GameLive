@@ -1,5 +1,4 @@
 ﻿window.BlocksAPiController = {
-    me: null,
     $canvas: null,
     canvasWidth: null,
     canvasHeight: null,
@@ -32,18 +31,20 @@
             }
         }
     },
+    clear: function() {
+        this.$canvas.empty();
+    },
     init: function (canvasSelector, width, height) {
+        this.$canvas = $(canvasSelector);
 
-        window.BlocksAPiController.me = window.BlocksAPiController;
+        this.canvasWidth = width;
+        this.canvasHeight = height;
 
-        this.me.$canvas = $(canvasSelector);
+        //TODO: delete
+        this.$canvas.css("background-color", "black");
 
-        this.me.canvasWidth = width;
-        this.me.canvasHeight = height;
-
-        this.me.$canvas.css("background-color", "black");
-        this.me.$canvas.css("width", width + "px");
-        this.me.$canvas.css("height", height + "px");
-        this.me.$canvas.addClass("blocks-canvas");
+        this.$canvas.css("width", width + "px");
+        this.$canvas.css("height", height + "px");
+        this.$canvas.addClass("blocks-canvas");
     }
 }

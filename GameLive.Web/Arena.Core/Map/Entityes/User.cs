@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using Arena.Core.Enums;
+using Arena.Core.Graphics;
 using Arena.Core.Interfaces;
 using Arena.Core.ObjectInteraction;
 using Arena.Core.ShipInfrastructure;
@@ -11,8 +12,6 @@ namespace Arena.Core.Map.Entityes
     [DataContract]
     public class User : BaseMapObject, IMovableObject, IInteractable // , IMapObject 
     {
-        [DataMember]
-        public string Id { get; set; }
         [DataMember]
         public string Name { get; set; }
 
@@ -119,6 +118,9 @@ namespace Arena.Core.Map.Entityes
                 {
                     var bullet = new Bullet
                     {
+                        TexturePath = ImageUrlHelper.MapEntity.Bullet,
+                        Width = 5,
+                        Height = 20,
                         UserId = Id,
                         TimeToLive = 100,
                         Position = new Position(Position.X, Position.Y, Position.Angle + _rnd.Next(-3, 3), 15),

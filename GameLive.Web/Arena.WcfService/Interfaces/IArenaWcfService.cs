@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using Arena.Core.Enums;
 using Arena.Core.Map.Entityes;
+using Arena.Core.ServiceEntityes;
 
 namespace Arena.WcfService.Interfaces
 {
@@ -19,5 +20,8 @@ namespace Arena.WcfService.Interfaces
 
         [OperationContract]
         List<Bullet> GetBullets();
+
+        [OperationContract]
+        List<Block> GetBlocks();
     }
 }
